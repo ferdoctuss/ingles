@@ -13,6 +13,7 @@
             --accent-hover: #0ea5e9;
             --muted-color: #94a3b8;
             --border-color: rgba(255, 255, 255, 0.08);
+            --warning-color: #fbbf24;
         }
 
         body {
@@ -41,12 +42,57 @@
             box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4);
             text-align: center;
             border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        /* Cabecera y botón discreto */
+        .header-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
         }
 
         h1 {
             font-size: 1.6rem;
-            margin-bottom: 20px;
+            margin: 0;
             letter-spacing: -0.5px;
+        }
+
+        .btn-discreto {
+            position: absolute;
+            right: 0;
+            background: transparent;
+            border: none;
+            color: var(--muted-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .btn-discreto:hover {
+            opacity: 1;
+            transform: rotate(45deg);
+        }
+
+        /* Botón Agregar API */
+        .api-btn {
+            background-color: rgba(251, 191, 36, 0.1);
+            color: var(--warning-color);
+            border: 1px solid var(--warning-color);
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.2s;
+        }
+
+        .api-btn:hover {
+            background-color: rgba(251, 191, 36, 0.2);
         }
 
         /* Selector de Niveles */
@@ -121,10 +167,9 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             padding: 20px;
             box-sizing: border-box;
-            position: relative;
         }
 
         .english-wrapper {
@@ -182,13 +227,44 @@
             border-left: 3px solid var(--accent-color);
             text-align: left;
         }
+
+        /* Botón Recargar Frase */
+        .btn-reload-phrase {
+            background-color: var(--accent-color);
+            color: #0f172a;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            display: none; /* Oculto por defecto hasta generar una frase */
+        }
+
+        .btn-reload-phrase:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-reload-phrase:active {
+            transform: scale(0.98);
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="card">
-            <h1>Daily English AI</h1>
+            
+            <div class="header-row">
+                <h1>Daily English AI</h1>
+                <!-- Botón discreto para recargar la web -->
+                <button class="btn-discreto" onclick="location.reload()" title="Recargar Web">↻</button>
+            </div>
+
+            <!-- Botón para agregar API (desaparece al tenerla) -->
+            <button id="btn-add-api" class="api-btn" onclick="solicitarApiKey()">🔑 Agregar API</button>
             
             <!-- Selector de Niveles -->
             <div class="levels-container">
@@ -199,10 +275,10 @@
 
             <!-- Botones de Categorías -->
             <div class="categories-grid">
-                <button class="cat-btn" onclick="generarFrase('Vida cotidiana', this)">☕ Vida cotidiana</button>
-                <button class="cat-btn" onclick="generarFrase('Pasatiempos', this)">🎮 Pasatiempos</button>
-                <button class="cat-btn" onclick="generarFrase('Hablar con pareja', this)">❤️ Hablar con pareja</button>
-                <button class="cat-btn" onclick="generarFrase('Hablar con hijo', this)">🧸 Hablar con hijo</button>
+                <button class="cat-btn" onclick="prepararFrase('Vida cotidiana', this)">☕ Vida cotidiana</button>
+                <button class="cat-btn" onclick="prepararFrase('Pasatiempos', this)">🎮 Pasatiempos</button>
+                <button class="cat-btn" onclick="prepararFrase('Hablar con pareja', this)">❤️ Hablar con pareja</button>
+                <button class="cat-btn" onclick="prepararFrase('Hablar con hijo', this)">🧸 Hablar con hijo</button>
             </div>
 
             <!-- Caja de Visualización -->
@@ -211,15 +287,41 @@
                 <div class="spanish-translation"></div>
                 <div class="example-usage" style="display:none;"></div>
             </div>
+
+            <!-- Botón para recargar una nueva frase del mismo tema -->
+            <button id="btn-reload-phrase" class="btn-reload-phrase" onclick="recargarFraseActual()">🔄 Recargar nueva frase</button>
+
         </div>
     </div>
 
-    <!-- Lógica de JavaScript integrada con la API -->
     <script>
-        const API_KEY = 'AQ.Ab8RN6J--BLPPlrCYWjtiu3vDJOUjfmY_HSksu69KdkRQ8v-eQ'; 
-        
         let nivelActual = 'BASIC';
+        let categoriaActiva = null;
+        let elementoCategoriaActivo = null;
         let fraseActualTexto = '';
+
+        // Función para revisar si ya hay API y ocultar el botón
+        function verificarInterfazApi() {
+            const apiBtn = document.getElementById('btn-add-api');
+            if (localStorage.getItem('gemini_api_key')) {
+                apiBtn.style.display = 'none';
+            } else {
+                apiBtn.style.display = 'inline-block';
+            }
+        }
+
+        // Ejecutar revisión de interfaz apenas carga la web
+        verificarInterfazApi();
+
+        // Función para pedir la API Key al hacer clic en "Agregar API"
+        function solicitarApiKey() {
+            const nuevaKey = prompt("Pega aquí tu API Key de Google AI Studio:");
+            if (nuevaKey && nuevaKey.trim() !== '') {
+                localStorage.setItem('gemini_api_key', nuevaKey.trim());
+                verificarInterfazApi();
+                alert("¡API Key guardada con éxito!");
+            }
+        }
 
         function seleccionarNivel(nivel, elemento) {
             nivelActual = nivel;
@@ -227,19 +329,48 @@
             elemento.classList.add('active');
         }
 
-        async function generarFrase(categoria, elemento) {
-            const container = document.getElementById('phraseContainer');
+        // Prepara los datos antes de llamar a la IA
+        function prepararFrase(categoria, elemento) {
+            categoriaActiva = categoria;
+            elementoCategoriaActivo = elemento;
             
             document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
             elemento.classList.add('active');
+
+            // Mostrar el botón de recargar frase
+            document.getElementById('btn-reload-phrase').style.display = 'block';
+
+            generarFrase();
+        }
+
+        // Dispara la IA con la misma categoría seleccionada previamente
+        function recargarFraseActual() {
+            if (categoriaActiva) {
+                generarFrase();
+            }
+        }
+
+        async function generarFrase() {
+            let API_KEY = localStorage.getItem('gemini_api_key');
+
+            if (!API_KEY) {
+                alert("Primero debes agregar tu API Key pulsando el botón amarillo '🔑 Agregar API'.");
+                return;
+            }
+
+            const container = document.getElementById('phraseContainer');
+            const btnReload = document.getElementById('btn-reload-phrase');
 
             container.innerHTML = `
                 <div class="english-phrase">Generando frase... 🤖</div>
                 <div class="spanish-translation">Creando contenido nivel ${nivelActual}...</div>
                 <div class="example-usage" style="display:none;"></div>
             `;
+            
+            btnReload.disabled = true;
+            btnReload.innerText = "Cargando...";
 
-            const promptText = `Actúa como un profesor experto de inglés. Genera una frase o expresión útil enfocada en la categoría "${categoria}" adecuada estrictamente para un nivel "${nivelActual}". 
+            const promptText = `Actúa como un profesor experto de inglés. Genera una frase o expresión útil enfocada en la categoría "${categoriaActiva}" adecuada estrictamente para un nivel "${nivelActual}". 
             Responde estrictamente usando un formato JSON con tres llaves exactas: 
             'en' (la frase en inglés), 
             'es' (la traducción al español), y 
@@ -259,7 +390,12 @@
                 const data = await response.json();
                 
                 if (data.error) {
-                    throw new Error(data.error.message || "Error devuelto por la API");
+                    if (data.error.code === 400 || data.error.code === 403) {
+                        localStorage.removeItem('gemini_api_key');
+                        verificarInterfazApi();
+                        throw new Error("Clave bloqueada o inválida.");
+                    }
+                    throw new Error(data.error.message);
                 }
 
                 if (data.candidates && data.candidates[0].content) {
@@ -280,16 +416,19 @@
                         <div class="example-usage">${resultado.ex}</div>
                     `;
                 } else {
-                    throw new Error("Estructura de respuesta inesperada.");
+                    throw new Error("Respuesta inesperada de la IA.");
                 }
 
             } catch (error) {
-                console.error("Detalle del error:", error);
+                console.error(error);
                 container.innerHTML = `
                     <div class="english-phrase" style="color: #f87171; font-size: 1rem;">Ocurrió un error</div>
-                    <div class="spanish-translation" style="font-size: 0.85rem;">No se pudo conectar con la IA. Revisa tu conexión.</div>
+                    <div class="spanish-translation" style="font-size: 0.85rem;">${error.message === "Clave bloqueada o inválida." ? "Tu clave es inválida. Agrégala de nuevo." : "Fallo de conexión."}</div>
                     <div class="example-usage" style="display:none;"></div>
                 `;
+            } finally {
+                btnReload.disabled = false;
+                btnReload.innerText = "🔄 Recargar nueva frase";
             }
         }
 
