@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily English Phrase Builder</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --muted-color: #94a3b8;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--text-color);
+        }
+
+        .phrase-box {
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 25px;
+            padding: 10px;
+        }
+
+        .english-phrase {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .spanish-translation {
+            font-size: 1.05rem;
+            color: var(--muted-color);
+            margin-bottom: 12px;
+        }
+
+        .example-usage {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #cbd5e1;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: #0f172a;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <h1>Daily English Practice</h1>
+            
+            <div class="phrase-box" id="phraseContainer">
+                <div class="english-phrase">¡Presiona el botón para generar tu frase del día!</div>
+                <div class="spanish-translation"></div>
+                <div class="example-usage"></div>
+            </div>
+
+            <button class="btn" onclick="generarFraseAleatoria()">Nueva Frase</button>
+        </div>
+    </div>
+
+    <script>
+        // Base de datos interna de frases cotidianas
+        const frasesCotidianas = [
+            {
+                en: "Let's call it a day.",
+                es: "Dejémoslo por hoy / Terminemos por hoy.",
+                ex: "Ejemplo: We've been working for 8 hours, let's call it a day."
+            },
+            {
+                en: "Take your time.",
+                es: "Tómate tu tiempo / No te apures.",
+                ex: "Ejemplo: Take your time to review the documents."
+            },
+            {
+                en: "It crossed my mind.",
+                es: "Se me pasó por la cabeza / Lo pensé.",
+                ex: "Ejemplo: Resigning crossed my mind, but I decided to stay."
+            },
+            {
+                en: "Keep me posted.",
+                es: "Mánteneme informado / Avísame de cualquier novedad.",
+                ex: "Ejemplo: Keep me posted on any updates regarding the meeting."
+            },
+            {
+                en: "Out of the blue.",
+                es: "De la nada / De repente / Inesperadamente.",
+                ex: "Ejemplo: She called me out of the blue yesterday."
+            },
+            {
+                en: "So far, so good.",
+                es: "Hasta ahora, todo bien.",
+                ex: "Ejemplo: How is the new project going? So far, so good."
+            },
+            {
+                en: "It's up to you.",
+                es: "Depende de ti / Tú decides.",
+                ex: "Ejemplo: We can go to the cinema or stay home. It's up to you."
+            },
+            {
+                en: "Get to the point.",
+                es: "Ve al grano.",
+                ex: "Ejemplo: Stop beating around the bush and get to the point."
+            },
+            {
+                en: "Break a leg!",
+                es: "¡Mucha suerte! (usado antes de una presentación o examen).",
+                ex: "Ejemplo: Break a leg on your English presentation!"
+            },
+            {
+                en: "I changed my mind.",
+                es: "Cambié de opinión.",
+                ex: "Ejemplo: I was going to buy the laptop, but I changed my mind."
+            }
+        ];
+
+        function generarFraseAleatoria() {
+            const container = document.getElementById('phraseContainer');
+            
+            // Seleccionar un índice aleatorio
+            const indiceAleatorio = Math.floor(Math.random() * frasesCotidianas.length);
+            const fraseSeleccionada = frasesCotidianas[indiceAleatorio];
+
+            // Inyectar el contenido en el HTML de forma dinámica
+            container.innerHTML = `
+                <div class="english-phrase">"${fraseSeleccionada.en}"</div>
+                <div class="spanish-translation">${fraseSeleccionada.es}</div>
+                <div class="example-usage">${fraseSeleccionada.ex}</div>
+            `;
+        }
+    </script>
+</body>
+</html>
