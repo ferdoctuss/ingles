@@ -148,6 +148,18 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-bottom: 25px;
+            max-height: 220px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        /* Scrollbar elegante para la lista de categorías */
+        .categories-grid::-webkit-scrollbar {
+            width: 4px;
+        }
+        .categories-grid::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
         }
 
         .cat-btn {
@@ -155,7 +167,7 @@
             color: var(--text-color);
             border: 1px solid var(--border-color);
             padding: 10px 12px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
             border-radius: 12px;
             cursor: pointer;
@@ -276,6 +288,10 @@
                 <button class="cat-btn" onclick="prepararFrase('Pasatiempos', this)">🎮 Pasatiempos</button>
                 <button class="cat-btn" onclick="prepararFrase('Hablar con pareja', this)">❤️ Hablar con pareja</button>
                 <button class="cat-btn" onclick="prepararFrase('Hablar con hijo', this)">🧸 Hablar con hijo</button>
+                <button class="cat-btn" onclick="prepararFrase('Trabajo y oficina', this)">💼 Trabajo y oficina</button>
+                <button class="cat-btn" onclick="prepararFrase('Viajes y turismo', this)">✈️ Viajes y turismo</button>
+                <button class="cat-btn" onclick="prepararFrase('Compras y restaurantes', this)">🍔 Compras y comida</button>
+                <button class="cat-btn" onclick="prepararFrase('Emergencias y salud', this)">🚨 Salud y emergencias</button>
             </div>
 
             <div class="phrase-box" id="phraseContainer">
