@@ -4,31 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Daily English Pro</title>
+    
+    <!-- Icono moderno incorporado para el acceso directo (PWA / Web Clip) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='115' fill='%230f172a'/><path d='M160 140h192c13.3 0 24 10.7 24 24s-10.7 24-24 24H160c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 96h192c13.3 0 24 10.7 24 24s-10.7 24-24 24H160c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 96h128c13.3 0 24 10.7 24 24s-10.7 24-24 24H160c-13.3 0-24-10.7-24-24s10.7-24 24-24z' fill='%2338bdf8'/><circle cx='356' cy='336' r='32' fill='%23f43f5e'/></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='115' fill='%230f172a'/><path d='M160 140h192c13.3 0 24 10.7 24 24s-10.7 24-24 24H160c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 96h192c13.3 0 24 10.7 24 24s-10.7 24-24 24H160c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 96h128c13.3 0 24 10.7 24 24s-10.7 24-24 24H160c-13.3 0-24-10.7-24-24s10.7-24 24-24 z' fill='%2338bdf8'/><circle cx='356' cy='336' r='32' fill='%23f43f5e'/></svg>">
+
     <style>
-        /* Modo automático según el sistema (Dark / Light) */
         :root {
-            --bg-color: #f1f5f9;
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-color: #0f172a;
-            --accent-color: #0284c7;
-            --accent-hover: #0369a1;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
             --muted-color: #64748b;
-            --border-color: rgba(0, 0, 0, 0.08);
+            --border-color: rgba(0, 0, 0, 0.06);
             --danger-color: #dc2626;
             --success-color: #059669;
+            
+            /* Tarjetas con acentos modernos (Modo Claro) */
+            --card-1: #eff6ff; --border-1: #bfdbfe;
+            --card-2: #f5f3ff; --border-2: #ddd6fe;
+            --card-3: #f0fdf4; --border-3: #bbf7d0;
+            --card-4: #fffbeb; --border-4: #fef3c7;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-color: #0f172a;
-                --card-bg: #1e293b;
+                --bg-color: #090d16;
+                --card-bg: #131d31;
                 --text-color: #f8fafc;
                 --accent-color: #38bdf8;
                 --accent-hover: #0ea5e9;
                 --muted-color: #94a3b8;
-                --border-color: rgba(255, 255, 255, 0.08);
+                --border-color: rgba(255, 255, 255, 0.06);
                 --danger-color: #f87171;
                 --success-color: #34d399;
+
+                /* Tarjetas con acentos modernos (Modo Oscuro) */
+                --card-1: rgba(56, 189, 248, 0.07); --border-1: rgba(56, 189, 248, 0.2);
+                --card-2: rgba(167, 139, 250, 0.07); --border-2: rgba(167, 139, 250, 0.2);
+                --card-3: rgba(52, 211, 153, 0.07); --border-3: rgba(52, 211, 153, 0.2);
+                --card-4: rgba(251, 191, 36, 0.07); --border-4: rgba(251, 191, 36, 0.2);
             }
         }
 
@@ -37,6 +53,7 @@
             touch-action: manipulation;
             -webkit-user-select: none;
             user-select: none;
+            box-sizing: border-box;
         }
 
         input, textarea {
@@ -59,17 +76,15 @@
 
         .container {
             width: 100%;
-            max-width: 520px;
-            padding: 20px;
-            box-sizing: border-box;
+            max-width: 500px;
+            padding: 14px;
         }
 
-        .card {
+        .main-card {
             background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 25px 20px;
-            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.15);
-            text-align: center;
+            border-radius: 24px;
+            padding: 20px 16px;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.12);
             border: 1px solid var(--border-color);
             position: relative;
             transition: background-color 0.3s, color 0.3s;
@@ -79,29 +94,36 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            padding: 0 4px;
         }
 
         h1 {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             margin: 0;
             letter-spacing: -0.5px;
-            color: var(--accent-color);
+            color: var(--text-color);
+            font-weight: 800;
         }
 
         .btn-icon {
-            background: transparent;
+            background: rgba(128, 128, 128, 0.1);
             border: none;
             color: var(--muted-color);
-            font-size: 1.3rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            padding: 5px;
-            transition: color 0.2s, transform 0.2s;
+            transition: all 0.2s;
         }
 
         .btn-icon:hover {
+            background: rgba(128, 128, 128, 0.2);
             color: var(--text-color);
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .view {
@@ -111,49 +133,53 @@
             display: block;
         }
 
-        /* Contenedor para mostrar 2 frases simultáneamente */
+        /* Cuadrícula compacta para 4 tarjetas */
         .phrases-grid {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 16px;
         }
 
         .phrase-box {
-            background: rgba(128, 128, 128, 0.05);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            padding: 16px;
-            box-sizing: border-box;
+            border-radius: 14px;
+            padding: 12px 14px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
+            align-items: flex-start;
+            text-align: left;
+            border: 1px solid;
+            transition: transform 0.15s ease;
         }
 
-        .english-wrapper {
+        /* Asignación de colores dinámicos para las 4 tarjetas */
+        .phrase-box:nth-child(1) { background-color: var(--card-1); border-color: var(--border-1); }
+        .phrase-box:nth-child(2) { background-color: var(--card-2); border-color: var(--border-2); }
+        .phrase-box:nth-child(3) { background-color: var(--card-3); border-color: var(--border-3); }
+        .phrase-box:nth-child(4) { background-color: var(--card-4); border-color: var(--border-4); }
+
+        .phrase-header-row {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
+            width: 100%;
+            margin-bottom: 4px;
         }
 
         .english-phrase {
-            font-size: 1.15rem;
+            font-size: 1.02rem;
             font-weight: 700;
             color: var(--text-color);
             line-height: 1.3;
         }
 
         .audio-btn {
-            background: rgba(56, 189, 248, 0.15);
+            background: rgba(128, 128, 128, 0.15);
             border: none;
-            color: var(--accent-color);
-            width: 32px;
-            height: 32px;
+            color: var(--text-color);
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -165,11 +191,11 @@
 
         .audio-btn:hover {
             background: var(--accent-color);
-            color: #0f172a;
+            color: #ffffff;
         }
 
         .spanish-translation {
-            font-size: 0.88rem;
+            font-size: 0.84rem;
             color: var(--muted-color);
             font-style: italic;
         }
@@ -178,15 +204,19 @@
             background-color: var(--accent-color);
             color: #ffffff;
             border: none;
-            padding: 14px 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 12px;
+            padding: 13px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 14px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, transform 0.05s;
             width: 100%;
-            box-sizing: border-box;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
         }
 
         .btn-primary:hover {
@@ -194,21 +224,20 @@
         }
 
         .btn-danger {
-            background-color: rgba(248, 113, 113, 0.15);
+            background-color: rgba(248, 113, 113, 0.12);
             color: var(--danger-color);
-            border: 1px solid var(--danger-color);
-            padding: 12px 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            border-radius: 12px;
+            border: 1px solid rgba(248, 113, 113, 0.3);
+            padding: 11px 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border-radius: 14px;
             cursor: pointer;
             transition: background 0.2s;
             width: 100%;
-            box-sizing: border-box;
         }
 
         .btn-danger:hover {
-            background-color: rgba(248, 113, 113, 0.25);
+            background-color: rgba(248, 113, 113, 0.2);
         }
 
         textarea {
@@ -216,14 +245,13 @@
             height: 180px;
             background: rgba(128, 128, 128, 0.05);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 14px;
             color: var(--text-color);
             padding: 12px;
-            box-sizing: border-box;
             font-family: inherit;
             font-size: 0.9rem;
             resize: vertical;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         textarea:focus {
@@ -235,22 +263,25 @@
             font-size: 0.82rem;
             color: var(--muted-color);
             text-align: left;
-            margin-bottom: 15px;
-            line-height: 1.5;
+            margin-bottom: 12px;
+            line-height: 1.4;
         }
 
         .counter-badge {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
+            font-weight: 600;
             color: var(--muted-color);
             margin-bottom: 12px;
-            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="card">
+        <div class="main-card">
             
             <!-- VISTA PRINCIPAL DE PRÁCTICA -->
             <div id="mainView" class="view active">
@@ -262,7 +293,7 @@
                 <div class="counter-badge" id="counterBadge">Frases restantes: 0</div>
 
                 <div class="phrases-grid" id="phrasesContainer">
-                    <!-- Se mostrarán 2 frases aquí -->
+                    <!-- Se mostrarán hasta 4 frases con colores dinámicos -->
                 </div>
 
                 <div id="actionsContainer">
@@ -278,14 +309,14 @@
                 </div>
 
                 <div class="instruction-text">
-                    Pega tus frases abajo separando el inglés y el español con una barra vertical <b>( | )</b>. Una frase por línea:
+                    Pega tus frases separando el inglés y el español con una barra vertical <b>( | )</b>. Una por línea:
                     <br><br><i>I wake up early | Me despierto temprano<br>How are you? | ¿Cómo estás?</i>
                 </div>
 
                 <textarea id="inputFrases" placeholder="Escribe o pega tus frases aquí..."></textarea>
 
                 <button class="btn-primary" onclick="guardarYCargarFrases()">💾 Guardar y Practicar</button>
-                <button class="btn-danger" onclick="limpiarBancoTotal()" style="margin-top: 10px;">🗑️ Borrar todo el banco</button>
+                <button class="btn-danger" onclick="limpiarBancoTotal()" style="margin-top: 6px;">🗑️ Borrar todo el banco</button>
             </div>
 
         </div>
@@ -295,7 +326,6 @@
         let bancoFrases = [];
         let frasesDisponibles = [];
 
-        // Bloqueo adicional de doble toque en JS para mayor seguridad en móviles
         let ultimoToke = 0;
         document.addEventListener('touchend', function (event) {
             const ahora = new Date().getTime();
@@ -315,7 +345,7 @@
                 cambiarVista('configView');
             } else {
                 reiniciarCicloPráctica();
-                siguienteParDeFrases();
+                siguienteBloqueDeFrases();
             }
         };
 
@@ -355,8 +385,8 @@
             
             reiniciarCicloPráctica();
             cambiarVista('mainView');
-            siguienteParDeFrases();
-            alert(`¡Se han cargado ${bancoFrases.length} frases exitosamente!`);
+            siguienteBloqueDeFrases();
+            alert(`¡Se han cargado ${bancoFrases.length} frases con éxito!`);
         }
 
         function reiniciarCicloPráctica() {
@@ -367,53 +397,52 @@
             }
         }
 
-        function siguienteParDeFrases() {
+        function siguienteBloqueDeFrases() {
             const container = document.getElementById('phrasesContainer');
             const actionsContainer = document.getElementById('actionsContainer');
             const counterBadge = document.getElementById('counterBadge');
 
             if (bancoFrases.length === 0) {
                 counterBadge.textContent = "Banco vacío";
-                container.innerHTML = `<div class="phrase-box"><div class="english-phrase" style="color: var(--muted-color); font-size: 1rem;">No hay frases cargadas. Toca el engranaje ⚙️ arriba para empezar.</div></div>`;
+                container.innerHTML = `<div class="phrase-box"><div class="english-phrase" style="color: var(--muted-color); font-size: 0.95rem;">No hay frases cargadas. Toca el engranaje ⚙️ arriba para empezar.</div></div>`;
                 actionsContainer.innerHTML = '';
                 return;
             }
 
-            // Si se acabaron las frases del ciclo actual
             if (frasesDisponibles.length === 0) {
                 counterBadge.textContent = "¡Ciclo completado!";
                 container.innerHTML = `
-                    <div class="phrase-box" style="padding: 24px;">
-                        <div class="english-phrase" style="color: var(--success-color); font-size: 1.2rem; margin-bottom: 6px;">¡Excelente trabajo! 🚀</div>
-                        <div class="spanish-translation" style="font-style: normal;">Has practicado todas las frases de tu banco.</div>
+                    <div class="phrase-box" style="padding: 24px; text-align: center; align-items: center;">
+                        <div class="english-phrase" style="color: var(--success-color); font-size: 1.15rem; margin-bottom: 4px;">¡Excelente trabajo! 🚀</div>
+                        <div class="spanish-translation" style="font-style: normal;">Has repasado todas las frases de tu banco.</div>
                     </div>
                 `;
                 actionsContainer.innerHTML = `
                     <button class="btn-primary" onclick="reiniciarYContinuar()">🔄 Seguir practicando</button>
-                    <button class="btn-danger" onclick="cambiarVista('configView')">🗑️ Limpiar / Gestionar banco</button>
+                    <button class="btn-danger" onclick="cambiarVista('configView')">🗑️ Gestionar banco</button>
                 `;
                 return;
             }
 
-            // Tomar hasta 2 frases del arreglo barajado
-            let parActual = [];
-            parActual.push(frasesDisponibles.pop());
-            if (frasesDisponibles.length > 0) {
-                parActual.push(frasesDisponibles.pop());
+            // Tomar hasta 4 frases del bloque aleatorio
+            let bloqueActual = [];
+            for (let i = 0; i < 4; i++) {
+                if (frasesDisponibles.length > 0) {
+                    bloqueActual.push(frasesDisponibles.pop());
+                }
             }
 
-            counterBadge.textContent = `Frases restantes en este ciclo: ${frasesDisponibles.length + parActual.length}`;
+            counterBadge.textContent = `Restantes en este ciclo: ${frasesDisponibles.length + bloqueActual.length}`;
 
             let htmlFrases = '';
-            parActual.forEach((frase, index) => {
-                // Generamos un identificador único seguro basado en el texto para el audio
+            bloqueActual.forEach((frase) => {
                 const textoSeguro = frase.en.replace(/'/g, "\\'");
                 htmlFrases += `
                     <div class="phrase-box">
-                        <div class="english-wrapper">
+                        <div class="phrase-header-row">
                             <div class="english-phrase">"${frase.en}"</div>
                             <button class="audio-btn" onclick="reproducirAudio('${textoSeguro}')" title="Escuchar">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
                             </button>
                         </div>
                         <div class="spanish-translation">${frase.es}</div>
@@ -423,13 +452,13 @@
 
             container.innerHTML = htmlFrases;
             actionsContainer.innerHTML = `
-                <button class="btn-primary" onclick="siguienteParDeFrases()">Siguiente ➡️</button>
+                <button class="btn-primary" onclick="siguienteBloqueDeFrases()">Siguiente ➡️</button>
             `;
         }
 
         function reiniciarYContinuar() {
             reiniciarCicloPráctica();
-            siguienteParDeFrases();
+            siguienteBloqueDeFrases();
         }
 
         function limpiarBancoTotal() {
@@ -437,7 +466,7 @@
                 bancoFrases = [];
                 localStorage.removeItem('mi_banco_ingles');
                 document.getElementById('inputFrases').value = '';
-                siguienteParDeFrases();
+                siguienteBloqueDeFrases();
                 cambiarVista('configView');
             }
         }
