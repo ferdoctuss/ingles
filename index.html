@@ -13,8 +13,8 @@
             --accent-hover: #0ea5e9;
             --muted-color: #94a3b8;
             --border-color: rgba(255, 255, 255, 0.08);
-            --warning-color: #fbbf24;
             --danger-color: #f87171;
+            --success-color: #34d399;
         }
 
         body {
@@ -31,7 +31,7 @@
 
         .container {
             width: 100%;
-            max-width: 520px;
+            max-width: 480px;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -48,156 +48,52 @@
 
         .header-row {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            position: relative;
+            margin-bottom: 25px;
         }
 
         h1 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             margin: 0;
             letter-spacing: -0.5px;
+            color: var(--accent-color);
         }
 
-        .btn-discreto {
-            position: absolute;
-            right: 0;
+        .btn-icon {
             background: transparent;
             border: none;
             color: var(--muted-color);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            opacity: 0.5;
-            transition: opacity 0.2s, transform 0.2s;
+            padding: 5px;
+            transition: color 0.2s, transform 0.2s;
         }
 
-        .btn-discreto:hover {
-            opacity: 1;
-            transform: rotate(45deg);
+        .btn-icon:hover {
+            color: var(--text-color);
+            transform: scale(1.1);
         }
 
-        .api-controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .api-btn {
-            background-color: rgba(251, 191, 36, 0.1);
-            color: var(--warning-color);
-            border: 1px solid var(--warning-color);
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .api-btn:hover {
-            background-color: rgba(251, 191, 36, 0.2);
-        }
-
-        .api-delete-btn {
-            background-color: rgba(248, 113, 113, 0.1);
-            color: var(--danger-color);
-            border: 1px solid var(--danger-color);
-            padding: 8px 16px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background 0.2s;
+        /* Vistas (Principal y Configuración) */
+        .view {
             display: none;
         }
-
-        .api-delete-btn:hover {
-            background-color: rgba(248, 113, 113, 0.2);
+        .view.active {
+            display: block;
         }
 
-        .levels-container {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 22px;
-        }
-
-        .level-btn {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--muted-color);
-            border: 1px solid var(--border-color);
-            padding: 6px 14px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .level-btn.active {
-            background-color: var(--accent-color);
-            color: #0f172a;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
-        }
-
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 25px;
-            max-height: 220px;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        .categories-grid::-webkit-scrollbar {
-            width: 4px;
-        }
-        .categories-grid::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
-        }
-
-        .cat-btn {
-            background-color: rgba(255, 255, 255, 0.03);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 10px 12px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cat-btn:hover {
-            background-color: rgba(56, 189, 248, 0.1);
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .cat-btn.active {
-            background-color: rgba(56, 189, 248, 0.15);
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-
+        /* Estilo de la Frase */
         .phrase-box {
             background: rgba(15, 23, 42, 0.6);
             border-radius: 14px;
             border: 1px solid var(--border-color);
-            min-height: 130px;
+            min-height: 150px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            margin-bottom: 20px;
+            align-items: center;
+            margin-bottom: 25px;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -206,29 +102,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 12px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
         }
 
         .english-phrase {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 700;
-            color: var(--accent-color);
+            color: var(--text-color);
+            line-height: 1.4;
         }
 
         .audio-btn {
             background: rgba(56, 189, 248, 0.15);
             border: none;
             color: var(--accent-color);
-            width: 34px;
-            height: 34px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform 0.1s, background 0.2s;
+            transition: background 0.2s, transform 0.1s;
             flex-shrink: 0;
         }
 
@@ -238,26 +135,83 @@
         }
 
         .spanish-translation {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--muted-color);
+            font-style: italic;
         }
 
-        .btn-reload-phrase {
+        /* Botones principales de acción */
+        .btn-primary {
             background-color: var(--accent-color);
             color: #0f172a;
             border: none;
-            padding: 12px 24px;
+            padding: 14px 20px;
             font-size: 1rem;
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: background-color 0.2s, transform 0.1s;
             width: 100%;
-            display: none;
+            box-sizing: border-box;
+            margin-bottom: 10px;
         }
 
-        .btn-reload-phrase:hover {
+        .btn-primary:hover {
             background-color: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background-color: rgba(248, 113, 113, 0.15);
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .btn-danger:hover {
+            background-color: rgba(248, 113, 113, 0.25);
+        }
+
+        /* Pantalla de Configuración / Carga */
+        textarea {
+            width: 100%;
+            height: 180px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-color);
+            padding: 12px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .instruction-text {
+            font-size: 0.82rem;
+            color: var(--muted-color);
+            text-align: left;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .counter-badge {
+            font-size: 0.8rem;
+            color: var(--muted-color);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -266,306 +220,181 @@
     <div class="container">
         <div class="card">
             
-            <div class="header-row">
-                <h1>Daily English Pro</h1>
-                <button class="btn-discreto" onclick="location.reload()" title="Recargar Web">↻</button>
+            <!-- VISTA PRINCIPAL DE PRÁCTICA -->
+            <div id="mainView" class="view active">
+                <div class="header-row">
+                    <h1>Daily English</h1>
+                    <button class="btn-icon" onclick="cambiarVista('configView')" title="Configuración">⚙️</button>
+                </div>
+
+                <div class="counter-badge" id="counterBadge">Frases restantes: 0</div>
+
+                <div class="phrase-box" id="phraseContainer">
+                    <!-- Contenido dinámico -->
+                </div>
+
+                <div id="actionsContainer">
+                    <!-- Botón siguiente o controles finales -->
+                </div>
             </div>
 
-            <div class="api-controls">
-                <button id="btn-add-api" class="api-btn" onclick="solicitarApiKey()">🔑 Modo IA (Opcional)</button>
-                <button id="btn-delete-api" class="api-delete-btn" onclick="borrarApiKey()">🗑️ Desactivar IA</button>
-            </div>
-            
-            <div class="levels-container">
-                <button class="level-btn active" onclick="seleccionarNivel('BASIC', this)">BASIC</button>
-                <button class="level-btn" onclick="seleccionarNivel('INTERMEDIATE', this)">INTERMEDIATE</button>
-                <button class="level-btn" onclick="seleccionarNivel('ADVANCED', this)">ADVANCED</button>
-            </div>
+            <!-- VISTA DE CONFIGURACIÓN Y CARGA -->
+            <div id="configView" class="view">
+                <div class="header-row">
+                    <h1>Configuración</h1>
+                    <button class="btn-icon" onclick="cambiarVista('mainView')" title="Volver">✕</button>
+                </div>
 
-            <div class="categories-grid">
-                <button class="cat-btn" onclick="prepararFrase('Vida cotidiana', this)">☕ Vida cotidiana</button>
-                <button class="cat-btn" onclick="prepararFrase('Pasatiempos', this)">🎮 Pasatiempos</button>
-                <button class="cat-btn" onclick="prepararFrase('Hablar con pareja', this)">❤️ Hablar con pareja</button>
-                <button class="cat-btn" onclick="prepararFrase('Hablar con hijo', this)">🧸 Hablar con hijo</button>
-                <button class="cat-btn" onclick="prepararFrase('Trabajo y oficina', this)">💼 Trabajo y oficina</button>
-                <button class="cat-btn" onclick="prepararFrase('Viajes y turismo', this)">✈️ Viajes y turismo</button>
-                <button class="cat-btn" onclick="prepararFrase('Compras y restaurantes', this)">🍔 Compras y comida</button>
-                <button class="cat-btn" onclick="prepararFrase('Emergencias y salud', this)">🚨 Salud y emergencias</button>
-            </div>
+                <div class="instruction-text">
+                    Pega tus frases abajo separando el inglés y el español con una barra vertical <b>( | )</b>. Una frase por línea:
+                    <br><br><i>I wake up early | Me despierto temprano<br>How are you? | ¿Cómo estás?</i>
+                </div>
 
-            <div class="phrase-box" id="phraseContainer">
-                <div class="english-phrase" style="font-size: 1.1rem; color: var(--muted-color);">Selecciona una categoría arriba para empezar 🚀</div>
-                <div class="spanish-translation"></div>
-            </div>
+                <textarea id="inputFrases" placeholder="Escribe o pega tus frases aquí..."></textarea>
 
-            <button id="btn-reload-phrase" class="btn-reload-phrase" onclick="recargarFraseActual()">🔄 Recargar nueva frase</button>
+                <button class="btn-primary" onclick="guardarYCargarFrases()">💾 Guardar y Practicar</button>
+                <button class="btn-danger" onclick="limpiarBancoTotal()" style="margin-top: 10px;">🗑️ Borrar todo el banco</button>
+            </div>
 
         </div>
     </div>
 
     <script>
-        // BANCO DE FRASES LOCAL ORGANIZADO POR NIVEL Y CATEGORÍA
-        const bancoFrases = {
-            "BASIC": {
-                "Vida cotidiana": [
-                    { en: "I wake up early every morning.", es: "Me despierto temprano todas las mañanas." },
-                    { en: "Do you drink coffee or tea?", es: "¿Tomas café o té?" },
-                    { en: "I need to clean the house today.", es: "Necesito limpiar la casa hoy." }
-                ],
-                "Pasatiempos": [
-                    { en: "I like listening to music in my free time.", es: "Me gusta escuchar música en mi tiempo libre." },
-                    { en: "Do you want to play a video game?", es: "¿Quieres jugar a un videojuego?" },
-                    { en: "Reading books helps me relax.", es: "Leer libros me ayuda a relajarme." }
-                ],
-                "Hablar con pareja": [
-                    { en: "I love you so much.", es: "Te amo mucho." },
-                    { en: "How was your day, my love?", es: "¿Cómo estuvo tu día, mi amor?" },
-                    { en: "Let's watch a movie tonight.", es: "Veamos una película esta noche." }
-                ],
-                "Hablar con hijo": [
-                    { en: "Did you wash your hands?", es: "¿Te lavaste las manos?" },
-                    { en: "Time to go to sleep, champion.", es: "Hora de ir a dormir, campeón." },
-                    { en: "I am very proud of you.", es: "Estoy muy orgulloso de ti." }
-                ],
-                "Trabajo y oficina": [
-                    { en: "I am checking my emails now.", es: "Estoy revisando mis correos ahora." },
-                    { en: "Can we schedule a meeting?", es: "¿Podemos programar una reunión?" },
-                    { en: "I am finishing this report.", es: "Estoy terminando este informe." }
-                ],
-                "Viajes y turismo": [
-                    { en: "Where is the nearest train station?", es: "¿Dónde está la estación de tren más cercana?" },
-                    { en: "I need a ticket to Lima, please.", es: "Necesito un boleto a Lima, por favor." },
-                    { en: "How much does this cost?", es: "¿Cuánto cuesta esto?" }
-                ],
-                "Compras y restaurantes": [
-                    { en: "Can I have the menu, please?", es: "¿Me da el menú, por favor?" },
-                    { en: "I would like a glass of water.", es: "Me gustaría un vaso de agua." },
-                    { en: "Do you accept credit cards?", es: "¿Aceptan tarjetas de crédito?" }
-                ],
-                "Emergencias y salud": [
-                    { en: "I need a doctor, please call an ambulance.", es: "Necesito un médico, por favor llamen a una ambulancia." },
-                    { en: "Where is the nearest hospital?", es: "¿Dónde está el hospital más cercano?" },
-                    { en: "I feel sick today.", es: "Me siento enfermo hoy." }
-                ]
-            },
-            "INTERMEDIATE": {
-                "Vida cotidiana": [
-                    { en: "I usually manage my time efficiently throughout the day.", es: "Por lo general, administro mi tiempo eficientemente durante todo el día." },
-                    { en: "It takes me about twenty minutes to commute to work.", es: "Me toma unos veinte minutos trasladarme al trabajo." }
-                ],
-                "Pasatiempos": [
-                    { en: "Lately, I've been getting into strategy games.", es: "Últimamente me he estado aficionando a los juegos de estrategia." },
-                    { en: "Photography allows me to capture special moments.", es: "La fotografía me permite capturar momentos especiales." }
-                ],
-                "Hablar con pareja": [
-                    { en: "I really appreciate everything you do for our family.", es: "Realmente aprecio todo lo que haces por nuestra familia." },
-                    { en: "Let's plan a special weekend getaway together.", es: "Planifiquemos juntos una escapada especial de fin de semana." }
-                ],
-                "Hablar con hijo": [
-                    { en: "Always try your best, no matter the outcome.", es: "Esfuérzate siempre al máximo, sin importar el resultado." },
-                    { en: "Let's work on your homework together step by step.", es: "Trabajemos en tu tarea juntos paso a paso." }
-                ],
-                "Trabajo y oficina": [
-                    { en: "We need to optimize our workflow to meet the deadline.", es: "Necesitamos optimizar nuestro flujo de trabajo para cumplir con el plazo." },
-                    { en: "I am leading a new project this month.", es: "Estoy liderando un nuevo proyecto este mes." }
-                ],
-                "Viajes y turismo": [
-                    { en: "Could you recommend some local hidden gems to visit?", es: "¿Podrías recomendarme algunos lugares ocultos locales para visitar?" },
-                    { en: "My flight was delayed by a couple of hours.", es: "Mi vuelo se retrasó un par de horas." }
-                ],
-                "Compras y restaurantes": [
-                    { en: "Could you tell me what the chef's special is today?", es: "¿Podría decirme cuál es la especialidad del chef hoy?" },
-                    { en: "I am looking for a jacket that fits well.", es: "Estoy buscando una chaqueta que me quede bien." }
-                ],
-                "Emergencias y salud": [
-                    { en: "I think I might be experiencing an allergic reaction.", es: "Creo que podría estar experimentando una reacción alérgica." },
-                    { en: "Could you prescribe something for this severe headache?", es: "¿Podría recetarme algo para este fuerte dolor de cabeza?" }
-                ]
-            },
-            "ADVANCED": {
-                "Vida cotidiana": [
-                    { en: "Striking a balance between professional responsibilities and personal life is paramount.", es: "Encontrar un equilibrio entre las responsabilidades profesionales y la vida personal es primordial." },
-                    { en: "Establishing robust daily routines significantly enhances productivity.", es: "Establecer rutinas diarias sólidas mejora significativamente la productividad." }
-                ],
-                "Pasatiempos": [
-                    { en: "Immersing myself in literature broadens my perspective on life.", es: "Inmerso en la literatura amplio mi perspectiva sobre la vida." },
-                    { en: "Mastering a complex hobby requires unwavering patience and dedication.", es: "Dominar un pasatiempo complejo requiere paciencia inquebrantable y dedicación." }
-                ],
-                "Hablar con pareja": [
-                    { en: "Your unwavering support means the world to me through thick and thin.", es: "Tu apoyo inquebrantable significa todo para mí en las buenas y en las malas." },
-                    { en: "Let's navigate these challenges hand in hand as a unified team.", es: "Afrontemos estos desafíos de la mano como un equipo unificado." }
-                ],
-                "Hablar con hijo": [
-                    { en: "Integrity and perseverance are traits that will serve you well throughout life.", es: "La integridad y la perseverancia son virtudes que te servirán mucho a lo largo de la vida." },
-                    { en: "Never hesitate to pursue your ambitions with utmost dedication.", es: "Nunca dudes en perseguir tus ambiciones con la máxima dedicación." }
-                ],
-                "Trabajo y oficina": [
-                    { en: "Effective cross-functional communication is crucial for organizational success.", es: "La comunicación transversal efectiva es crucial para el éxito organizacional." },
-                    { en: "We must implement strategic contingencies to mitigate potential risks.", es: "Debemos implementar contingencias estratégicas para mitigar riesgos potenciales." }
-                ],
-                "Viajes y turismo": [
-                    { en: "Traveling off the beaten path offers profound cultural immersion.", es: "Viajar fuera de lo común ofrece una profunda inmersión cultural." },
-                    { en: "Navigating foreign customs requires a high degree of cultural sensitivity.", es: "Navegar por costumbres extranjeras requiere un alto grado de sensibilidad cultural." }
-                ],
-                "Compras y restaurantes": [
-                    { en: "I would like to inquire about the provenance of these artisanal ingredients.", es: "Me gustaría consultar sobre la procedencia de estos ingredientes artesanales." },
-                    { en: "The culinary presentation of this dish exceeds all expectations.", es: "La presentación culinaria de este plato supera todas las expectativas." }
-                ],
-                "Emergencias y salud": [
-                    { en: "Immediate medical intervention is imperative given the circumstances.", es: "La intervención médica inmediata es imperativa dadas las circunstancias." },
-                    { en: "Please administer first aid while we await professional assistance.", es: "Por favor, administren primeros auxilios mientras esperamos asistencia profesional." }
-                ]
+        let bancoFrases = [];
+        let frasesDisponibles = [];
+        let fraseActual = null;
+
+        // Cargar datos guardados al iniciar
+        window.onload = function() {
+            const guardadas = localStorage.getItem('mi_banco_ingles');
+            if (guardadas) {
+                bancoFrases = JSON.parse(guardadas);
+            }
+            
+            // Si no hay frases, mostrar configuración directamente
+            if (bancoFrases.length === 0) {
+                cambiarVista('configView');
+            } else {
+                reiniciarCicloPráctica();
+                siguienteFrase();
             }
         };
 
-        let nivelActual = 'BASIC';
-        let categoriaActiva = null;
-        let fraseActualTexto = '';
-
-        function verificarInterfazApi() {
-            const apiBtn = document.getElementById('btn-add-api');
-            const deleteBtn = document.getElementById('btn-delete-api');
+        function cambiarVista(vistaId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(vistaId).classList.add('active');
             
-            if (localStorage.getItem('gemini_api_key')) {
-                apiBtn.style.display = 'none';
-                deleteBtn.style.display = 'inline-block';
-            } else {
-                apiBtn.style.display = 'inline-block';
-                deleteBtn.style.display = 'none';
+            if (vistaId === 'configView') {
+                // Rellenar el textarea con las frases actuales en formato texto
+                const textoPlano = bancoFrases.map(f => `${f.en} | ${f.es}`).join('\n');
+                document.getElementById('inputFrases').value = textoPlano;
             }
         }
 
-        verificarInterfazApi();
+        function guardarYCargarFrases() {
+            const texto = document.getElementById('inputFrases').value;
+            const lineas = texto.split('\n');
+            let nuevasFrases = [];
 
-        function solicitarApiKey() {
-            const nuevaKey = prompt("Pega aquí tu API Key de Google AI Studio (Opcional, si deseas usar IA en lugar del banco local):");
-            if (nuevaKey && nuevaKey.trim() !== '') {
-                localStorage.setItem('gemini_api_key', nuevaKey.trim());
-                verificarInterfazApi();
-                alert("Modo IA activado.");
-            }
-        }
-
-        function borrarApiKey() {
-            if(confirm("¿Deseas desactivar la IA y volver al modo rápido local?")) {
-                localStorage.removeItem('gemini_api_key');
-                verificarInterfazApi();
-                alert("Modo rápido local activado.");
-            }
-        }
-
-        function seleccionarNivel(nivel, elemento) {
-            nivelActual = nivel;
-            document.querySelectorAll('.level-btn').forEach(btn => btn.classList.remove('active'));
-            elemento.classList.add('active');
-            if (categoriaActiva) generarFrase();
-        }
-
-        function prepararFrase(categoria, elemento) {
-            categoriaActiva = categoria;
-            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
-            elemento.classList.add('active');
-            document.getElementById('btn-reload-phrase').style.display = 'block';
-            generarFrase();
-        }
-
-        function recargarFraseActual() {
-            if (categoriaActiva) generarFrase();
-        }
-
-        async function generarFrase() {
-            let API_KEY = localStorage.getItem('gemini_api_key');
-
-            const container = document.getElementById('phraseContainer');
-            const btnReload = document.getElementById('btn-reload-phrase');
-
-            // SI NO HAY API KEY, USA EL BANCO LOCAL (RÁPIDO Y SIN ERRORES DE RED)
-            if (!API_KEY) {
-                const lista = bancoFrases[nivelActual]?.[categoriaActiva];
-                if (lista && lista.length > 0) {
-                    // Seleccionar una frase al azar del banco local
-                    const itemAleatorio = lista[Math.floor(Math.random() * lista.length)];
-                    fraseActualTexto = itemAleatorio.en;
-
-                    container.innerHTML = `
-                        <div class="english-wrapper">
-                            <div class="english-phrase">"${itemAleatorio.en}"</div>
-                            <button class="audio-btn" onclick="reproducirAudio()" title="Escuchar">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
-                            </button>
-                        </div>
-                        <div class="spanish-translation">${itemAleatorio.es}</div>
-                    `;
-                } else {
-                    container.innerHTML = `
-                        <div class="english-phrase" style="color: #f87171;">Sin frases disponibles</div>
-                        <div class="spanish-translation">Prueba con otra categoría.</div>
-                    `;
+            for (let linea of lineas) {
+                if (linea.includes('|')) {
+                    const partes = linea.split('|');
+                    const en = partes[0].trim();
+                    const es = partes[1].trim();
+                    if (en && es) {
+                        nuevasFrases.push({ en, es });
+                    }
                 }
+            }
+
+            if (nuevasFrases.length === 0) {
+                alert("Por favor ingresa al menos una frase válida usando el formato: Inglés | Español");
                 return;
             }
 
-            // SI CONFIGURASTE API KEY, USA LA IA
-            container.innerHTML = `
-                <div class="english-phrase">Conectando con IA... 🤖</div>
-                <div class="spanish-translation">Por favor espera.</div>
-            `;
-            btnReload.disabled = true;
+            bancoFrases = nuevasFrases;
+            localStorage.setItem('mi_banco_ingles', JSON.stringify(bancoFrases));
+            
+            reiniciarCicloPráctica();
+            cambiarVista('mainView');
+            siguienteFrase();
+            alert(`¡Se han cargado ${bancoFrases.length} frases exitosamente!`);
+        }
 
-            const promptText = `Actúa como un profesor experto de inglés. Genera una frase útil enfocada en "${categoriaActiva}" para un nivel "${nivelActual}". Responde estrictamente usando formato JSON con solo dos llaves: 'en' (frase en inglés) y 'es' (traducción al español). No agregues texto fuera del JSON.`;
+        function reiniciarCicloPráctica() {
+            // Copiar el banco completo a la lista de disponibles para barajar
+            frasesDisponibles = [...bancoFrases];
+            // Barajar aleatoriamente (Algoritmo Fisher-Yates)
+            for (let i = frasesDisponibles.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [frasesDisponibles[i], frasesDisponibles[j]] = [frasesDisponibles[j], frasesDisponibles[i]];
+            }
+        }
 
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: promptText }] }],
-                        generationConfig: { responseMimeType: "application/json" }
-                    })
-                });
+        function siguienteFrase() {
+            const container = document.getElementById('phraseContainer');
+            const actionsContainer = document.getElementById('actionsContainer');
+            const counterBadge = document.getElementById('counterBadge');
 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error?.message || `Error del servidor: ${response.status}`);
-                }
+            if (bancoFrases.length === 0) {
+                counterBadge.textContent = "Banco vacío";
+                container.innerHTML = `<div class="english-phrase" style="color: var(--muted-color); font-size: 1.1rem;">No hay frases cargadas. Toca el engranaje ⚙️ arriba para empezar.</div>`;
+                actionsContainer.innerHTML = '';
+                return;
+            }
 
-                const data = await response.json();
-                
-                if (data.candidates && data.candidates[0].content) {
-                    let textoRespuesta = data.candidates[0].content.parts[0].text;
-                    textoRespuesta = textoRespuesta.replace(/```json/g, '').replace(/```/g, '').trim();
-                    const resultado = JSON.parse(textoRespuesta);
-
-                    fraseActualTexto = resultado.en;
-
-                    container.innerHTML = `
-                        <div class="english-wrapper">
-                            <div class="english-phrase">"${resultado.en}"</div>
-                            <button class="audio-btn" onclick="reproducirAudio()" title="Escuchar">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
-                            </button>
-                        </div>
-                        <div class="spanish-translation">${resultado.es}</div>
-                    `;
-                } else {
-                    throw new Error("Respuesta de la IA incompleta.");
-                }
-
-            } catch (error) {
-                console.error(error);
+            // Si se acabaron las frases del ciclo actual
+            if (frasesDisponibles.length === 0) {
+                counterBadge.textContent = "¡Ciclo completado!";
                 container.innerHTML = `
-                    <div class="english-phrase" style="color: #f87171; font-size: 1.1rem;">Error de conexión</div>
-                    <div class="spanish-translation" style="font-size: 0.85rem; color: #fbbf24;">Detalle: ${error.message}</div>
+                    <div class="english-phrase" style="color: var(--success-color);">¡Excelente trabajo! 🚀</div>
+                    <div class="spanish-translation">Has practicado todas las frases de tu banco.</div>
                 `;
-            } finally {
-                btnReload.disabled = false;
+                actionsContainer.innerHTML = `
+                    <button class="btn-primary" onclick="reiniciarYContinuar()">🔄 Seguir practicando</button>
+                    <button class="btn-danger" onclick="cambiarVista('configView')">🗑️ Limpiar / Gestionar banco</button>
+                `;
+                return;
+            }
+
+            // Tomar la siguiente frase y removerla de las disponibles
+            fraseActual = frasesDisponibles.pop();
+            counterBadge.textContent = `Frases restantes en este ciclo: ${frasesDisponibles.length + 1}`;
+
+            container.innerHTML = `
+                <div class="english-wrapper">
+                    <div class="english-phrase">"${fraseActual.en}"</div>
+                    <button class="audio-btn" onclick="reproducirAudio()" title="Escuchar">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                    </button>
+                </div>
+                <div class="spanish-translation">${fraseActual.es}</div>
+            `;
+
+            actionsContainer.innerHTML = `
+                <button class="btn-primary" onclick="siguienteFrase()">Siguiente ➡️</button>
+            `;
+        }
+
+        function reiniciarYContinuar() {
+            reiniciarCicloPráctica();
+            siguienteFrase();
+        }
+
+        function limpiarBancoTotal() {
+            if (confirm("¿Estás seguro de vaciar todo tu banco de frases?")) {
+                bancoFrases = [];
+                localStorage.removeItem('mi_banco_ingles');
+                document.getElementById('inputFrases').value = '';
+                siguienteFrase();
+                cambiarVista('configView');
             }
         }
 
         function reproducirAudio() {
-            if (!fraseActualTexto) return;
+            if (!fraseActual || !fraseActual.en) return;
             window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(fraseActualTexto);
+            const utterance = new SpeechSynthesisUtterance(fraseActual.en);
             utterance.lang = 'en-US';
             utterance.rate = 0.9;
             window.speechSynthesis.speak(utterance);
