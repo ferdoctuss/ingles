@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily English AI Pro</title>
+    <title>Daily English Pro</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -153,7 +153,6 @@
             padding-right: 4px;
         }
 
-        /* Scrollbar elegante para la lista de categorías */
         .categories-grid::-webkit-scrollbar {
             width: 4px;
         }
@@ -268,13 +267,13 @@
         <div class="card">
             
             <div class="header-row">
-                <h1>Daily English AI</h1>
+                <h1>Daily English Pro</h1>
                 <button class="btn-discreto" onclick="location.reload()" title="Recargar Web">↻</button>
             </div>
 
             <div class="api-controls">
-                <button id="btn-add-api" class="api-btn" onclick="solicitarApiKey()">🔑 Agregar API</button>
-                <button id="btn-delete-api" class="api-delete-btn" onclick="borrarApiKey()">🗑️ Cambiar API</button>
+                <button id="btn-add-api" class="api-btn" onclick="solicitarApiKey()">🔑 Modo IA (Opcional)</button>
+                <button id="btn-delete-api" class="api-delete-btn" onclick="borrarApiKey()">🗑️ Desactivar IA</button>
             </div>
             
             <div class="levels-container">
@@ -305,6 +304,120 @@
     </div>
 
     <script>
+        // BANCO DE FRASES LOCAL ORGANIZADO POR NIVEL Y CATEGORÍA
+        const bancoFrases = {
+            "BASIC": {
+                "Vida cotidiana": [
+                    { en: "I wake up early every morning.", es: "Me despierto temprano todas las mañanas." },
+                    { en: "Do you drink coffee or tea?", es: "¿Tomas café o té?" },
+                    { en: "I need to clean the house today.", es: "Necesito limpiar la casa hoy." }
+                ],
+                "Pasatiempos": [
+                    { en: "I like listening to music in my free time.", es: "Me gusta escuchar música en mi tiempo libre." },
+                    { en: "Do you want to play a video game?", es: "¿Quieres jugar a un videojuego?" },
+                    { en: "Reading books helps me relax.", es: "Leer libros me ayuda a relajarme." }
+                ],
+                "Hablar con pareja": [
+                    { en: "I love you so much.", es: "Te amo mucho." },
+                    { en: "How was your day, my love?", es: "¿Cómo estuvo tu día, mi amor?" },
+                    { en: "Let's watch a movie tonight.", es: "Veamos una película esta noche." }
+                ],
+                "Hablar con hijo": [
+                    { en: "Did you wash your hands?", es: "¿Te lavaste las manos?" },
+                    { en: "Time to go to sleep, champion.", es: "Hora de ir a dormir, campeón." },
+                    { en: "I am very proud of you.", es: "Estoy muy orgulloso de ti." }
+                ],
+                "Trabajo y oficina": [
+                    { en: "I am checking my emails now.", es: "Estoy revisando mis correos ahora." },
+                    { en: "Can we schedule a meeting?", es: "¿Podemos programar una reunión?" },
+                    { en: "I am finishing this report.", es: "Estoy terminando este informe." }
+                ],
+                "Viajes y turismo": [
+                    { en: "Where is the nearest train station?", es: "¿Dónde está la estación de tren más cercana?" },
+                    { en: "I need a ticket to Lima, please.", es: "Necesito un boleto a Lima, por favor." },
+                    { en: "How much does this cost?", es: "¿Cuánto cuesta esto?" }
+                ],
+                "Compras y restaurantes": [
+                    { en: "Can I have the menu, please?", es: "¿Me da el menú, por favor?" },
+                    { en: "I would like a glass of water.", es: "Me gustaría un vaso de agua." },
+                    { en: "Do you accept credit cards?", es: "¿Aceptan tarjetas de crédito?" }
+                ],
+                "Emergencias y salud": [
+                    { en: "I need a doctor, please call an ambulance.", es: "Necesito un médico, por favor llamen a una ambulancia." },
+                    { en: "Where is the nearest hospital?", es: "¿Dónde está el hospital más cercano?" },
+                    { en: "I feel sick today.", es: "Me siento enfermo hoy." }
+                ]
+            },
+            "INTERMEDIATE": {
+                "Vida cotidiana": [
+                    { en: "I usually manage my time efficiently throughout the day.", es: "Por lo general, administro mi tiempo eficientemente durante todo el día." },
+                    { en: "It takes me about twenty minutes to commute to work.", es: "Me toma unos veinte minutos trasladarme al trabajo." }
+                ],
+                "Pasatiempos": [
+                    { en: "Lately, I've been getting into strategy games.", es: "Últimamente me he estado aficionando a los juegos de estrategia." },
+                    { en: "Photography allows me to capture special moments.", es: "La fotografía me permite capturar momentos especiales." }
+                ],
+                "Hablar con pareja": [
+                    { en: "I really appreciate everything you do for our family.", es: "Realmente aprecio todo lo que haces por nuestra familia." },
+                    { en: "Let's plan a special weekend getaway together.", es: "Planifiquemos juntos una escapada especial de fin de semana." }
+                ],
+                "Hablar con hijo": [
+                    { en: "Always try your best, no matter the outcome.", es: "Esfuérzate siempre al máximo, sin importar el resultado." },
+                    { en: "Let's work on your homework together step by step.", es: "Trabajemos en tu tarea juntos paso a paso." }
+                ],
+                "Trabajo y oficina": [
+                    { en: "We need to optimize our workflow to meet the deadline.", es: "Necesitamos optimizar nuestro flujo de trabajo para cumplir con el plazo." },
+                    { en: "I am leading a new project this month.", es: "Estoy liderando un nuevo proyecto este mes." }
+                ],
+                "Viajes y turismo": [
+                    { en: "Could you recommend some local hidden gems to visit?", es: "¿Podrías recomendarme algunos lugares ocultos locales para visitar?" },
+                    { en: "My flight was delayed by a couple of hours.", es: "Mi vuelo se retrasó un par de horas." }
+                ],
+                "Compras y restaurantes": [
+                    { en: "Could you tell me what the chef's special is today?", es: "¿Podría decirme cuál es la especialidad del chef hoy?" },
+                    { en: "I am looking for a jacket that fits well.", es: "Estoy buscando una chaqueta que me quede bien." }
+                ],
+                "Emergencias y salud": [
+                    { en: "I think I might be experiencing an allergic reaction.", es: "Creo que podría estar experimentando una reacción alérgica." },
+                    { en: "Could you prescribe something for this severe headache?", es: "¿Podría recetarme algo para este fuerte dolor de cabeza?" }
+                ]
+            },
+            "ADVANCED": {
+                "Vida cotidiana": [
+                    { en: "Striking a balance between professional responsibilities and personal life is paramount.", es: "Encontrar un equilibrio entre las responsabilidades profesionales y la vida personal es primordial." },
+                    { en: "Establishing robust daily routines significantly enhances productivity.", es: "Establecer rutinas diarias sólidas mejora significativamente la productividad." }
+                ],
+                "Pasatiempos": [
+                    { en: "Immersing myself in literature broadens my perspective on life.", es: "Inmerso en la literatura amplio mi perspectiva sobre la vida." },
+                    { en: "Mastering a complex hobby requires unwavering patience and dedication.", es: "Dominar un pasatiempo complejo requiere paciencia inquebrantable y dedicación." }
+                ],
+                "Hablar con pareja": [
+                    { en: "Your unwavering support means the world to me through thick and thin.", es: "Tu apoyo inquebrantable significa todo para mí en las buenas y en las malas." },
+                    { en: "Let's navigate these challenges hand in hand as a unified team.", es: "Afrontemos estos desafíos de la mano como un equipo unificado." }
+                ],
+                "Hablar con hijo": [
+                    { en: "Integrity and perseverance are traits that will serve you well throughout life.", es: "La integridad y la perseverancia son virtudes que te servirán mucho a lo largo de la vida." },
+                    { en: "Never hesitate to pursue your ambitions with utmost dedication.", es: "Nunca dudes en perseguir tus ambiciones con la máxima dedicación." }
+                ],
+                "Trabajo y oficina": [
+                    { en: "Effective cross-functional communication is crucial for organizational success.", es: "La comunicación transversal efectiva es crucial para el éxito organizacional." },
+                    { en: "We must implement strategic contingencies to mitigate potential risks.", es: "Debemos implementar contingencias estratégicas para mitigar riesgos potenciales." }
+                ],
+                "Viajes y turismo": [
+                    { en: "Traveling off the beaten path offers profound cultural immersion.", es: "Viajar fuera de lo común ofrece una profunda inmersión cultural." },
+                    { en: "Navigating foreign customs requires a high degree of cultural sensitivity.", es: "Navegar por costumbres extranjeras requiere un alto grado de sensibilidad cultural." }
+                ],
+                "Compras y restaurantes": [
+                    { en: "I would like to inquire about the provenance of these artisanal ingredients.", es: "Me gustaría consultar sobre la procedencia de estos ingredientes artesanales." },
+                    { en: "The culinary presentation of this dish exceeds all expectations.", es: "La presentación culinaria de este plato supera todas las expectativas." }
+                ],
+                "Emergencias y salud": [
+                    { en: "Immediate medical intervention is imperative given the circumstances.", es: "La intervención médica inmediata es imperativa dadas las circunstancias." },
+                    { en: "Please administer first aid while we await professional assistance.", es: "Por favor, administren primeros auxilios mientras esperamos asistencia profesional." }
+                ]
+            }
+        };
+
         let nivelActual = 'BASIC';
         let categoriaActiva = null;
         let fraseActualTexto = '';
@@ -325,18 +438,19 @@
         verificarInterfazApi();
 
         function solicitarApiKey() {
-            const nuevaKey = prompt("Pega aquí tu API Key de Google AI Studio:");
+            const nuevaKey = prompt("Pega aquí tu API Key de Google AI Studio (Opcional, si deseas usar IA en lugar del banco local):");
             if (nuevaKey && nuevaKey.trim() !== '') {
                 localStorage.setItem('gemini_api_key', nuevaKey.trim());
                 verificarInterfazApi();
+                alert("Modo IA activado.");
             }
         }
 
         function borrarApiKey() {
-            if(confirm("¿Estás seguro que deseas borrar la API Key actual e ingresar una nueva?")) {
+            if(confirm("¿Deseas desactivar la IA y volver al modo rápido local?")) {
                 localStorage.removeItem('gemini_api_key');
                 verificarInterfazApi();
-                alert("API Key borrada. Por favor ingresa la nueva.");
+                alert("Modo rápido local activado.");
             }
         }
 
@@ -344,6 +458,7 @@
             nivelActual = nivel;
             document.querySelectorAll('.level-btn').forEach(btn => btn.classList.remove('active'));
             elemento.classList.add('active');
+            if (categoriaActiva) generarFrase();
         }
 
         function prepararFrase(categoria, elemento) {
@@ -361,25 +476,46 @@
         async function generarFrase() {
             let API_KEY = localStorage.getItem('gemini_api_key');
 
-            if (!API_KEY) {
-                alert("Primero debes agregar tu API Key pulsando el botón '🔑 Agregar API'.");
-                return;
-            }
-
             const container = document.getElementById('phraseContainer');
             const btnReload = document.getElementById('btn-reload-phrase');
 
+            // SI NO HAY API KEY, USA EL BANCO LOCAL (RÁPIDO Y SIN ERRORES DE RED)
+            if (!API_KEY) {
+                const lista = bancoFrases[nivelActual]?.[categoriaActiva];
+                if (lista && lista.length > 0) {
+                    // Seleccionar una frase al azar del banco local
+                    const itemAleatorio = lista[Math.floor(Math.random() * lista.length)];
+                    fraseActualTexto = itemAleatorio.en;
+
+                    container.innerHTML = `
+                        <div class="english-wrapper">
+                            <div class="english-phrase">"${itemAleatorio.en}"</div>
+                            <button class="audio-btn" onclick="reproducirAudio()" title="Escuchar">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                            </button>
+                        </div>
+                        <div class="spanish-translation">${itemAleatorio.es}</div>
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <div class="english-phrase" style="color: #f87171;">Sin frases disponibles</div>
+                        <div class="spanish-translation">Prueba con otra categoría.</div>
+                    `;
+                }
+                return;
+            }
+
+            // SI CONFIGURASTE API KEY, USA LA IA
             container.innerHTML = `
-                <div class="english-phrase">Conectando... 🤖</div>
+                <div class="english-phrase">Conectando con IA... 🤖</div>
                 <div class="spanish-translation">Por favor espera.</div>
             `;
-            
             btnReload.disabled = true;
 
             const promptText = `Actúa como un profesor experto de inglés. Genera una frase útil enfocada en "${categoriaActiva}" para un nivel "${nivelActual}". Responde estrictamente usando formato JSON con solo dos llaves: 'en' (frase en inglés) y 'es' (traducción al español). No agregues texto fuera del JSON.`;
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${API_KEY}`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
