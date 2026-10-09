@@ -468,7 +468,11 @@
             }
 
             if (guardadas) {
-                bancoFrases = JSON.parse(guardadas);
+                try {
+                    bancoFrases = JSON.parse(guardadas);
+                } catch (e) {
+                    bancoFrases = [];
+                }
             }
             
             if (bancoFrases.length === 0) {
@@ -542,17 +546,18 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        model: "llama-3.3-70b-versatile",
+                        model: "llama-3.1-8b-instant",
                         messages: [{ role: "user", content: promptText }],
                         temperature: 0.7
                     })
                 });
 
+                const data = await response.json();
+
                 if (!response.ok) {
-                    throw new Error("Error en la conexión con la API de Groq. Verifica tu clave.");
+                    throw new Error(data.error?.message || "Error desconocido en la API de Groq.");
                 }
 
-                const data = await response.json();
                 const contenido = data.choices[0].message.content;
                 const lineas = contenido.split('\n');
                 let nuevasFrases = [];
@@ -569,7 +574,7 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
                 }
 
                 if (nuevasFrases.length === 0) {
-                    throw new Error("No se pudieron parsear las frases devueltas por la IA.");
+                    throw new Error("La IA no devolvió las frases en el formato correcto. Intenta de nuevo.");
                 }
 
                 bancoFrases = nuevasFrases;
@@ -579,7 +584,7 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
                 mostrarFraseActual();
 
             } catch (error) {
-                alert(error.message);
+                alert("Error: " + error.message);
             } finally {
                 btn.disabled = false;
                 btn.textContent = "✨ Generar";
