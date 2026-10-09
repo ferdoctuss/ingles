@@ -42,7 +42,7 @@
             box-sizing: border-box;
         }
 
-        input, textarea {
+        input, select {
             -webkit-user-select: text;
             user-select: text;
         }
@@ -107,7 +107,7 @@
         }
 
         .btn-icon {
-            background: rgba(128, 128, 128, 0.06);
+            background: rgba(128, 128, 128, 0.08);
             border: 1px solid var(--border-color);
             color: var(--muted-color);
             width: 36px;
@@ -122,7 +122,7 @@
         }
 
         .btn-icon:hover {
-            background: rgba(128, 128, 128, 0.15);
+            background: rgba(128, 128, 128, 0.2);
             color: var(--text-color);
         }
 
@@ -136,7 +136,7 @@
         }
 
         .immersive-card {
-            background: rgba(128, 128, 128, 0.03);
+            background: rgba(128, 128, 128, 0.04);
             border-radius: 20px;
             border: 1px solid var(--border-color);
             padding: 24px 16px;
@@ -154,7 +154,7 @@
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(128, 128, 128, 0.06);
+            background: rgba(128, 128, 128, 0.08);
             border: 1px solid var(--border-color);
             color: var(--muted-color);
             width: 32px;
@@ -164,20 +164,20 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             transition: all 0.2s;
         }
 
         .btn-copy:hover {
-            background: rgba(128, 128, 128, 0.15);
+            background: rgba(128, 128, 128, 0.2);
             color: var(--text-color);
         }
 
         .english-phrase {
-            font-size: 1.45rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: var(--text-color);
-            line-height: 1.35;
+            line-height: 1.3;
             margin-bottom: 20px;
         }
 
@@ -194,7 +194,7 @@
             cursor: pointer;
             transition: transform 0.1s, background 0.2s;
             margin-bottom: 20px;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
         }
 
         .audio-btn-large:active {
@@ -206,7 +206,7 @@
         }
 
         .spanish-translation {
-            font-size: 1rem;
+            font-size: 1.02rem;
             color: var(--muted-color);
             font-style: italic;
             max-width: 90%;
@@ -214,11 +214,14 @@
         }
 
         .ai-generator-box {
-            background: rgba(128, 128, 128, 0.03);
+            background: rgba(128, 128, 128, 0.04);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 10px;
-            margin-bottom: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .ai-row {
@@ -228,26 +231,37 @@
 
         .input-topic {
             flex-grow: 1;
-            background: rgba(128, 128, 128, 0.05);
+            background: rgba(128, 128, 128, 0.06);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 10px 14px;
+            border-radius: 10px;
+            padding: 10px 12px;
             color: var(--text-color);
             font-family: inherit;
             font-size: 0.9rem;
         }
 
-        .input-topic:focus {
+        .input-topic:focus, .select-level:focus {
             outline: none;
             border-color: var(--accent-color);
+        }
+
+        .select-level {
+            background: rgba(128, 128, 128, 0.06);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 8px 12px;
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 0.85rem;
+            width: 100%;
         }
 
         .btn-ai {
             background-color: var(--accent-color);
             color: #fff;
             border: none;
-            padding: 0 16px;
-            border-radius: 12px;
+            padding: 0 14px;
+            border-radius: 10px;
             font-weight: 700;
             font-size: 0.9rem;
             cursor: pointer;
@@ -271,11 +285,11 @@
         }
 
         .btn-nav {
-            background-color: rgba(128, 128, 128, 0.06);
+            background-color: rgba(128, 128, 128, 0.1);
             color: var(--text-color);
             border: 1px solid var(--border-color);
             padding: 12px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 700;
             border-radius: 14px;
             cursor: pointer;
@@ -284,7 +298,7 @@
         }
 
         .btn-nav:hover:not(:disabled) {
-            background-color: rgba(128, 128, 128, 0.15);
+            background-color: rgba(128, 128, 128, 0.2);
         }
 
         .btn-nav:disabled {
@@ -297,7 +311,7 @@
             color: #ffffff;
             border: none;
             padding: 12px 20px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 700;
             border-radius: 14px;
             cursor: pointer;
@@ -317,10 +331,10 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             color: var(--text-color);
-            padding: 12px 14px;
+            padding: 10px 12px;
             font-family: inherit;
             font-size: 0.9rem;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .config-input:focus {
@@ -332,12 +346,12 @@
             font-size: 0.85rem;
             color: var(--muted-color);
             text-align: left;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             line-height: 1.4;
         }
 
         .counter-badge {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: var(--muted-color);
             text-transform: uppercase;
@@ -383,15 +397,20 @@
                 <div class="counter-badge" id="counterBadge">Listo para empezar</div>
 
                 <div class="immersive-card" id="phraseCard">
-                    <!-- Contenido dinámico o saludo -->
+                    <!-- Contenido dinámico / Saludo aleatorio -->
                 </div>
 
-                <!-- Generador de IA -->
+                <!-- Generador rápido por IA con Groq y Niveles -->
                 <div class="ai-generator-box">
                     <div class="ai-row">
-                        <input type="text" id="inputTopic" class="input-topic" placeholder="Escribe un tema (ej: Comida, viajes...)">
+                        <input type="text" id="inputTopic" class="input-topic" placeholder="Ej: Comida, aeropuerto, oficina...">
                         <button class="btn-ai" id="btnGenerarIA" onclick="generarFrasesConGroq()">✨ Generar</button>
                     </div>
+                    <select id="selectLevel" class="select-level">
+                        <option value="Básico">Nivel: Básico</option>
+                        <option value="Intermedio" selected>Nivel: Intermedio</option>
+                        <option value="Avanzado">Nivel: Avanzado</option>
+                    </select>
                 </div>
 
                 <div class="nav-controls" id="navControls">
@@ -406,10 +425,14 @@
                     <button class="btn-icon" onclick="cambiarVista('mainView')" title="Volver">✕</button>
                 </div>
 
-                <div class="instruction-text"><b>API Key de Groq:</b></div>
+                <div class="instruction-text" style="margin-bottom: 6px;"><b>API Key de Groq:</b></div>
                 <input type="password" id="inputApiKey" class="config-input" placeholder="gsk_...">
 
-                <button class="btn-primary" onclick="guardarConfiguracion()">💾 Guardar Configuración</button>
+                <div class="instruction-text">
+                    Configura tu clave secreta de Groq para que la IA genere de forma automática tus sesiones de práctica diarias con pronunciación y traducción en tiempo real.
+                </div>
+
+                <button class="btn-primary" onclick="guardarConfiguracion()" style="margin-top: 10px;">💾 Guardar Clave</button>
             </div>
 
             <div id="toast" class="toast">¡Copiado al portapapeles!</div>
@@ -421,11 +444,10 @@
         let indiceActual = 0;
 
         const saludosAleatorios = [
-            { en: "Every day is a new opportunity to learn English.", es: "Cada día es una nueva oportunidad para aprender inglés." },
-            { en: "Consistency is the key to master any language.", es: "La constancia es la clave para dominar cualquier idioma." },
-            { en: "Believe in yourself and your language journey.", es: "Cree en ti mismo y en tu viaje de aprendizaje." },
-            { en: "Small daily progress adds up to huge results.", es: "El pequeño progreso diario se acumula en grandes resultados." },
-            { en: "Type any topic below to generate your daily sentences.", es: "Escribe cualquier tema abajo para generar tus frases diarias." }
+            "¡Hola! ¿Qué te gustaría practicar hoy? 🚀",
+            "Un nuevo día para mejorar tu inglés. Escribe un tema abajo ✨",
+            "¿Listo para aprender algo nuevo? Ingresa una situación o tema 🎯",
+            "Pequeños avances diarios crean grandes resultados. ¡Comenzamos! 💡"
         ];
 
         let ultimoToke = 0;
@@ -450,7 +472,7 @@
             }
             
             if (bancoFrases.length === 0) {
-                mostrarSaludoInicial();
+                mostrarSaludoAleatorio();
             } else {
                 indiceActual = 0;
                 mostrarFraseActual();
@@ -466,16 +488,31 @@
             const apiKey = document.getElementById('inputApiKey').value.trim();
             if (apiKey) {
                 localStorage.setItem('groq_api_key', apiKey);
-                alert("¡Configuración guardada con éxito!");
+                alert("¡API Key guardada con éxito!");
                 cambiarVista('mainView');
-                if (bancoFrases.length === 0) mostrarSaludoInicial();
             } else {
-                alert("Por favor ingresa una API Key válida.");
+                alert("Por favor ingresa una clave válida.");
             }
+        }
+
+        function mostrarSaludoAleatorio() {
+            const card = document.getElementById('phraseCard');
+            const navControls = document.getElementById('navControls');
+            const counterBadge = document.getElementById('counterBadge');
+
+            counterBadge.textContent = "Daily English Pro";
+            const saludo = saludosAleatorios[Math.floor(Math.random() * saludosAleatorios.length)];
+
+            card.innerHTML = `
+                <div class="english-phrase" style="font-size: 1.25rem; color: var(--text-color);">${saludo}</div>
+                <div class="spanish-translation" style="font-style: normal;">Escribe un tema abajo para crear tus frases con IA.</div>
+            `;
+            navControls.innerHTML = `<button class="btn-primary" onclick="document.getElementById('inputTopic').focus()">Escribe un tema...</button>`;
         }
 
         async function generarFrasesConGroq() {
             const tema = document.getElementById('inputTopic').value.trim();
+            const nivel = document.getElementById('selectLevel').value;
             const apiKey = localStorage.getItem('groq_api_key') || document.getElementById('inputApiKey').value.trim();
 
             if (!apiKey) {
@@ -485,7 +522,7 @@
             }
 
             if (!tema) {
-                alert("Por favor escribe un tema (ej: Comida, aeropuerto, oficina).");
+                alert("Por favor escribe un tema o situación (ej: Comida, Restaurante, Viajes).");
                 return;
             }
 
@@ -493,7 +530,7 @@
             btn.disabled = true;
             btn.textContent = "Generando...";
 
-            const promptText = `Genera exactamente 25 frases cotidianas y naturales en inglés sobre el tema: "${tema}". 
+            const promptText = `Genera exactamente 25 frases cotidianas y naturales en inglés sobre el tema: "${tema}", adaptadas a un nivel ${nivel}. 
 Devuélvelas estrictamente en formato de texto plano, una por línea, separando el inglés y su traducción al español con una barra vertical (|). 
 No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con el formato: Frase en inglés | Traducción al español.`;
 
@@ -549,36 +586,13 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
             }
         }
 
-        function mostrarSaludoInicial() {
-            const card = document.getElementById('phraseCard');
-            const navControls = document.getElementById('navControls');
-            const counterBadge = document.getElementById('counterBadge');
-
-            counterBadge.textContent = "Bienvenido";
-            const saludo = saludosAleatorios[Math.floor(Math.random() * saludosAleatorios.length)];
-            const textoSeguro = saludo.en.replace(/'/g, "\\'");
-
-            card.innerHTML = `
-                <button class="btn-copy" onclick="copiarTexto('${saludo.en} - ${saludo.es}')" title="Copiar">📋</button>
-                <div class="english-phrase">"${saludo.en}"</div>
-                <button class="audio-btn-large" onclick="reproducirAudio('${textoSeguro}')" title="Escuchar">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
-                </button>
-                <div class="spanish-translation">${saludo.es}</div>
-            `;
-
-            navControls.innerHTML = `
-                <button class="btn-primary" onclick="document.getElementById('inputTopic').focus()">✨ Escribe un tema abajo para empezar</button>
-            `;
-        }
-
         function mostrarFraseActual() {
             const card = document.getElementById('phraseCard');
             const navControls = document.getElementById('navControls');
             const counterBadge = document.getElementById('counterBadge');
 
             if (bancoFrases.length === 0) {
-                mostrarSaludoInicial();
+                mostrarSaludoAleatorio();
                 return;
             }
 
@@ -586,11 +600,11 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
                 counterBadge.textContent = "¡Ciclo completado!";
                 card.innerHTML = `
                     <div class="english-phrase" style="color: var(--success-color); font-size: 1.3rem;">¡Excelente trabajo! 🚀</div>
-                    <div class="spanish-translation" style="font-style: normal; margin-bottom: 10px;">Has repasado todas las frases de tu banco.</div>
+                    <div class="spanish-translation" style="font-style: normal; margin-bottom: 10px;">Has repasado ordenadamente todas las frases de tu sesión.</div>
                 `;
                 navControls.innerHTML = `
                     <button class="btn-nav" onclick="reiniciarCiclo()">🔄 Repetir</button>
-                    <button class="btn-primary" onclick="document.getElementById('inputTopic').focus()">✨ Nuevo Tema</button>
+                    <button class="btn-primary" onclick="document.getElementById('inputTopic').focus()">Nuevo Tema</button>
                 `;
                 return;
             }
@@ -638,7 +652,7 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
                 bancoFrases = [];
                 localStorage.removeItem('mi_banco_ingles');
                 indiceActual = 0;
-                mostrarSaludoInicial();
+                mostrarSaludoAleatorio();
             }
         }
 
@@ -654,10 +668,8 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
         function copiarFraseActual() {
             if (bancoFrases.length === 0 || indiceActual >= bancoFrases.length) return;
             const frase = bancoFrases[indiceActual];
-            copiarTexto(`${frase.en} - ${frase.es}`);
-        }
-
-        function copiarTexto(textoACopiar) {
+            const textoACopiar = `${frase.en} - ${frase.es}`;
+            
             navigator.clipboard.writeText(textoACopiar).then(() => {
                 const toast = document.getElementById('toast');
                 toast.classList.add('show');
