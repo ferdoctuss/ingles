@@ -442,6 +442,7 @@
     <script>
         let bancoFrases = [];
         let indiceActual = 0;
+        const selectedModel = "openai/gpt-oss-120b";
 
         const saludosAleatorios = [
             "¡Hola! ¿Qué te gustaría practicar hoy? 🚀",
@@ -461,7 +462,7 @@
 
         window.onload = function() {
             const guardadas = localStorage.getItem('mi_banco_ingles');
-            const apiKeyGuardada = localStorage.getItem('groq_api_key');
+            const apiKeyGuardada = localStorage.getItem('paul_groq_key') || localStorage.getItem('groq_api_key');
             
             if (apiKeyGuardada) {
                 document.getElementById('inputApiKey').value = apiKeyGuardada;
@@ -491,6 +492,7 @@
         function guardarConfiguracion() {
             const apiKey = document.getElementById('inputApiKey').value.trim();
             if (apiKey) {
+                localStorage.setItem('paul_groq_key', apiKey);
                 localStorage.setItem('groq_api_key', apiKey);
                 alert("¡API Key guardada con éxito!");
                 cambiarVista('mainView');
@@ -517,7 +519,7 @@
         async function generarFrasesConGroq() {
             const tema = document.getElementById('inputTopic').value.trim();
             const nivel = document.getElementById('selectLevel').value;
-            const apiKey = localStorage.getItem('groq_api_key') || document.getElementById('inputApiKey').value.trim();
+            const apiKey = localStorage.getItem('paul_groq_key') || localStorage.getItem('groq_api_key') || document.getElementById('inputApiKey').value.trim();
 
             if (!apiKey) {
                 alert("Por favor ingresa tu API Key de Groq en la configuración (⚙️).");
@@ -546,7 +548,7 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        model: "llama-3.1-8b-instant",
+                        model: selectedModel,
                         messages: [{ role: "user", content: promptText }],
                         temperature: 0.7
                     })
