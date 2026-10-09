@@ -90,7 +90,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         h1 {
@@ -146,7 +146,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            margin: 10px 0;
+            margin: 8px 0;
             position: relative;
         }
 
@@ -174,26 +174,26 @@
         }
 
         .english-phrase {
-            font-size: 1.5rem;
+            font-size: 1.45rem;
             font-weight: 800;
             color: var(--text-color);
             line-height: 1.3;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .audio-btn-large {
             background: var(--accent-color);
             border: none;
             color: #ffffff;
-            width: 52px;
-            height: 52px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: transform 0.1s, background 0.2s;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
         }
 
@@ -206,7 +206,7 @@
         }
 
         .spanish-translation {
-            font-size: 1.02rem;
+            font-size: 1rem;
             color: var(--muted-color);
             font-style: italic;
             max-width: 90%;
@@ -217,27 +217,30 @@
             background: rgba(128, 128, 128, 0.04);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 12px;
-            margin-bottom: 10px;
+            padding: 10px;
+            margin-bottom: 6px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
+            width: 100%;
         }
 
         .ai-row {
             display: flex;
-            gap: 8px;
+            gap: 6px;
+            width: 100%;
         }
 
         .input-topic {
-            flex-grow: 1;
+            flex: 1;
+            min-width: 0;
             background: rgba(128, 128, 128, 0.06);
             border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 10px 12px;
             color: var(--text-color);
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
 
         .input-topic:focus, .select-level:focus {
@@ -260,13 +263,14 @@
             background-color: var(--accent-color);
             color: #fff;
             border: none;
-            padding: 0 14px;
+            padding: 0 12px;
             border-radius: 10px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: background 0.2s;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .btn-ai:hover {
@@ -281,7 +285,7 @@
         .nav-controls {
             display: flex;
             gap: 10px;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         .btn-nav {
@@ -403,7 +407,7 @@
                 <!-- Generador rápido por IA con Groq y Niveles -->
                 <div class="ai-generator-box">
                     <div class="ai-row">
-                        <input type="text" id="inputTopic" class="input-topic" placeholder="Ej: Comida, aeropuerto, oficina...">
+                        <input type="text" id="inputTopic" class="input-topic" placeholder="Ej: Viaje a Canadá, comida...">
                         <button class="btn-ai" id="btnGenerarIA" onclick="generarFrasesConGroq()">✨ Generar</button>
                     </div>
                     <select id="selectLevel" class="select-level">
@@ -429,7 +433,7 @@
                 <input type="password" id="inputApiKey" class="config-input" placeholder="gsk_...">
 
                 <div class="instruction-text">
-                    Configura tu clave secreta de Groq para que la IA genere de forma automática tus sesiones de práctica diarias con pronunciación y traducción en tiempo real.
+                    Configura tu clave secreta de Groq para generar sesiones de práctica personalizadas y prácticas al instante.
                 </div>
 
                 <button class="btn-primary" onclick="guardarConfiguracion()" style="margin-top: 10px;">💾 Guardar Clave</button>
@@ -510,14 +514,14 @@
             const saludo = saludosAleatorios[Math.floor(Math.random() * saludosAleatorios.length)];
 
             card.innerHTML = `
-                <div class="english-phrase" style="font-size: 1.25rem; color: var(--text-color);">${saludo}</div>
-                <div class="spanish-translation" style="font-style: normal;">Escribe un tema abajo para crear tus frases con IA.</div>
+                <div class="english-phrase" style="font-size: 1.2rem; color: var(--text-color);">${saludo}</div>
+                <div class="spanish-translation" style="font-style: normal;">Escribe un tema o situación abajo para crear tus frases.</div>
             `;
             navControls.innerHTML = `<button class="btn-primary" onclick="document.getElementById('inputTopic').focus()">Escribe un tema...</button>`;
         }
 
         async function generarFrasesConGroq() {
-            const tema = document.getElementById('inputTopic').value.trim();
+            const userInput = document.getElementById('inputTopic').value.trim();
             const nivel = document.getElementById('selectLevel').value;
             const apiKey = localStorage.getItem('paul_groq_key') || localStorage.getItem('groq_api_key') || document.getElementById('inputApiKey').value.trim();
 
@@ -527,8 +531,8 @@
                 return;
             }
 
-            if (!tema) {
-                alert("Por favor escribe un tema o situación (ej: Comida, Restaurante, Viajes).");
+            if (!userInput) {
+                alert("Por favor escribe un tema, situación o propósito (ej: Viaje a Canadá, Aeropuerto, Restaurante).");
                 return;
             }
 
@@ -536,7 +540,9 @@
             btn.disabled = true;
             btn.textContent = "Generando...";
 
-            const promptText = `Genera exactamente 25 frases cotidianas y naturales en inglés sobre el tema: "${tema}", adaptadas a un nivel ${nivel}. 
+            const promptText = `El usuario ha ingresado el siguiente propósito, situación o tema: "${userInput}". 
+Genera exactamente 25 frases u oraciones prácticas y útiles que el usuario pueda usar directamente en esa situación (por ejemplo, si menciona viajar a un país, incluye frases de supervivencia, aduana, hotel, transporte, pedir comida o pedir indicaciones, y evita frases simplonas como "quiero ir a"). 
+Las frases deben estar adaptadas a un nivel ${nivel}. 
 Devuélvelas estrictamente en formato de texto plano, una por línea, separando el inglés y su traducción al español con una barra vertical (|). 
 No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con el formato: Frase en inglés | Traducción al español.`;
 
@@ -624,7 +630,7 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
                 <button class="btn-copy" onclick="copiarFraseActual()" title="Copiar frase">📋</button>
                 <div class="english-phrase">"${frase.en}"</div>
                 <button class="audio-btn-large" onclick="reproducirAudio('${textoSeguro}')" title="Escuchar">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
                 </button>
                 <div class="spanish-translation">${frase.es}</div>
             `;
