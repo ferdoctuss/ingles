@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Daily English Pro</title>
     
-    <!-- Icono optimizado para iOS y dispositivos móviles -->
     <link rel="apple-touch-icon" href="https://i.imgur.com/8Q96z1l.png">
     <link rel="icon" type="image/png" href="https://i.imgur.com/8Q96z1l.png">
 
@@ -36,7 +35,6 @@
             }
         }
 
-        /* Bloqueo total de zoom y gestos por defecto */
         * {
             touch-action: manipulation;
             -webkit-user-select: none;
@@ -103,22 +101,28 @@
             font-weight: 800;
         }
 
+        .header-actions {
+            display: flex;
+            gap: 6px;
+        }
+
         .btn-icon {
-            background: rgba(128, 128, 128, 0.1);
-            border: none;
+            background: rgba(128, 128, 128, 0.06);
+            border: 1px solid var(--border-color);
             color: var(--muted-color);
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s;
+            font-size: 0.9rem;
         }
 
         .btn-icon:hover {
-            background: rgba(128, 128, 128, 0.2);
+            background: rgba(128, 128, 128, 0.15);
             color: var(--text-color);
         }
 
@@ -131,9 +135,8 @@
             display: flex;
         }
 
-        /* Tarjeta Inmersiva Gigante */
         .immersive-card {
-            background: rgba(128, 128, 128, 0.04);
+            background: rgba(128, 128, 128, 0.03);
             border-radius: 20px;
             border: 1px solid var(--border-color);
             padding: 24px 16px;
@@ -147,12 +150,11 @@
             position: relative;
         }
 
-        /* Botón minimalista de copiar en la esquina superior derecha de la tarjeta */
         .btn-copy {
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(128, 128, 128, 0.08);
+            background: rgba(128, 128, 128, 0.06);
             border: 1px solid var(--border-color);
             color: var(--muted-color);
             width: 32px;
@@ -162,20 +164,20 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: all 0.2s;
         }
 
         .btn-copy:hover {
-            background: rgba(128, 128, 128, 0.2);
+            background: rgba(128, 128, 128, 0.15);
             color: var(--text-color);
         }
 
         .english-phrase {
-            font-size: 1.5rem;
+            font-size: 1.45rem;
             font-weight: 800;
             color: var(--text-color);
-            line-height: 1.3;
+            line-height: 1.35;
             margin-bottom: 20px;
         }
 
@@ -192,7 +194,7 @@
             cursor: pointer;
             transition: transform 0.1s, background 0.2s;
             margin-bottom: 20px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
         }
 
         .audio-btn-large:active {
@@ -204,20 +206,19 @@
         }
 
         .spanish-translation {
-            font-size: 1.02rem;
+            font-size: 1rem;
             color: var(--muted-color);
             font-style: italic;
             max-width: 90%;
             line-height: 1.4;
         }
 
-        /* Panel de generador de IA en la pantalla principal */
         .ai-generator-box {
-            background: rgba(128, 128, 128, 0.04);
+            background: rgba(128, 128, 128, 0.03);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 12px;
-            margin-bottom: 10px;
+            padding: 10px;
+            margin-bottom: 6px;
         }
 
         .ai-row {
@@ -227,10 +228,10 @@
 
         .input-topic {
             flex-grow: 1;
-            background: rgba(128, 128, 128, 0.06);
+            background: rgba(128, 128, 128, 0.05);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px 12px;
+            border-radius: 12px;
+            padding: 10px 14px;
             color: var(--text-color);
             font-family: inherit;
             font-size: 0.9rem;
@@ -245,8 +246,8 @@
             background-color: var(--accent-color);
             color: #fff;
             border: none;
-            padding: 0 14px;
-            border-radius: 10px;
+            padding: 0 16px;
+            border-radius: 12px;
             font-weight: 700;
             font-size: 0.9rem;
             cursor: pointer;
@@ -263,7 +264,6 @@
             cursor: not-allowed;
         }
 
-        /* Panel de Navegación */
         .nav-controls {
             display: flex;
             gap: 10px;
@@ -271,11 +271,11 @@
         }
 
         .btn-nav {
-            background-color: rgba(128, 128, 128, 0.1);
+            background-color: rgba(128, 128, 128, 0.06);
             color: var(--text-color);
             border: 1px solid var(--border-color);
             padding: 12px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             border-radius: 14px;
             cursor: pointer;
@@ -284,7 +284,7 @@
         }
 
         .btn-nav:hover:not(:disabled) {
-            background-color: rgba(128, 128, 128, 0.2);
+            background-color: rgba(128, 128, 128, 0.15);
         }
 
         .btn-nav:disabled {
@@ -297,7 +297,7 @@
             color: #ffffff;
             border: none;
             padding: 12px 20px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 700;
             border-radius: 14px;
             cursor: pointer;
@@ -311,64 +311,33 @@
             background-color: var(--accent-hover);
         }
 
-        .btn-danger {
-            background-color: rgba(248, 113, 113, 0.12);
-            color: var(--danger-color);
-            border: 1px solid rgba(248, 113, 113, 0.3);
-            padding: 10px 16px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background 0.2s;
-            width: 100%;
-        }
-
-        .btn-danger:hover {
-            background-color: rgba(248, 113, 113, 0.2);
-        }
-
-        textarea.config-textarea {
-            width: 100%;
-            height: 120px;
-            background: rgba(128, 128, 128, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-color);
-            padding: 10px;
-            font-family: inherit;
-            font-size: 0.85rem;
-            resize: none;
-            margin-bottom: 10px;
-        }
-
-        textarea.config-textarea:focus, input.config-input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-
         .config-input {
             width: 100%;
             background: rgba(128, 128, 128, 0.05);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             color: var(--text-color);
-            padding: 10px 12px;
+            padding: 12px 14px;
             font-family: inherit;
             font-size: 0.9rem;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
+        }
+
+        .config-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
         }
 
         .instruction-text {
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             color: var(--muted-color);
             text-align: left;
-            margin-bottom: 8px;
-            line-height: 1.35;
+            margin-bottom: 6px;
+            line-height: 1.4;
         }
 
         .counter-badge {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 700;
             color: var(--muted-color);
             text-transform: uppercase;
@@ -405,20 +374,23 @@
             <div id="mainView" class="view active">
                 <div class="header-row">
                     <h1>Daily English</h1>
-                    <button class="btn-icon" onclick="cambiarVista('configView')" title="Configuración">⚙️</button>
+                    <div class="header-actions">
+                        <button class="btn-icon" onclick="limpiarBancoTotal()" title="Limpiar todo">🗑️</button>
+                        <button class="btn-icon" onclick="cambiarVista('configView')" title="Configuración">⚙️</button>
+                    </div>
                 </div>
 
-                <div class="counter-badge" id="counterBadge">Frase 0 de 0</div>
+                <div class="counter-badge" id="counterBadge">Listo para empezar</div>
 
                 <div class="immersive-card" id="phraseCard">
-                    <!-- Contenido dinámico de la frase -->
+                    <!-- Contenido dinámico o saludo -->
                 </div>
 
-                <!-- Generador rápido por IA con Groq -->
+                <!-- Generador de IA -->
                 <div class="ai-generator-box">
                     <div class="ai-row">
-                        <input type="text" id="inputTopic" class="input-topic" placeholder="Ej: Comida, aeropuerto, oficina...">
-                        <button class="btn-ai" id="btnGenerarIA" onclick="generarFrasesConGroq()">✨ Generar IA</button>
+                        <input type="text" id="inputTopic" class="input-topic" placeholder="Escribe un tema (ej: Comida, viajes...)">
+                        <button class="btn-ai" id="btnGenerarIA" onclick="generarFrasesConGroq()">✨ Generar</button>
                     </div>
                 </div>
 
@@ -427,24 +399,17 @@
                 </div>
             </div>
 
-            <!-- VISTA DE CONFIGURACIÓN Y CARGA -->
+            <!-- VISTA DE CONFIGURACIÓN -->
             <div id="configView" class="view">
                 <div class="header-row">
                     <h1>Configuración</h1>
                     <button class="btn-icon" onclick="cambiarVista('mainView')" title="Volver">✕</button>
                 </div>
 
-                <div class="instruction-text" style="margin-bottom: 4px;"><b>API Key de Groq:</b></div>
+                <div class="instruction-text"><b>API Key de Groq:</b></div>
                 <input type="password" id="inputApiKey" class="config-input" placeholder="gsk_...">
 
-                <div class="instruction-text">
-                    O pega tus frases manualmente <b>(Inglés | Español)</b>, una por línea:
-                </div>
-
-                <textarea id="inputFrases" class="config-textarea" placeholder="I wake up early | Me despierto temprano"></textarea>
-
-                <button class="btn-primary" onclick="guardarConfiguracion()" style="margin-bottom: 8px;">💾 Guardar Cambios</button>
-                <button class="btn-danger" onclick="limpiarBancoTotal()">🗑️ Vaciar todo el banco</button>
+                <button class="btn-primary" onclick="guardarConfiguracion()">💾 Guardar Configuración</button>
             </div>
 
             <div id="toast" class="toast">¡Copiado al portapapeles!</div>
@@ -454,6 +419,14 @@
     <script>
         let bancoFrases = [];
         let indiceActual = 0;
+
+        const saludosAleatorios = [
+            { en: "Every day is a new opportunity to learn English.", es: "Cada día es una nueva oportunidad para aprender inglés." },
+            { en: "Consistency is the key to master any language.", es: "La constancia es la clave para dominar cualquier idioma." },
+            { en: "Believe in yourself and your language journey.", es: "Cree en ti mismo y en tu viaje de aprendizaje." },
+            { en: "Small daily progress adds up to huge results.", es: "El pequeño progreso diario se acumula en grandes resultados." },
+            { en: "Type any topic below to generate your daily sentences.", es: "Escribe cualquier tema abajo para generar tus frases diarias." }
+        ];
 
         let ultimoToke = 0;
         document.addEventListener('touchend', function (event) {
@@ -477,7 +450,7 @@
             }
             
             if (bancoFrases.length === 0) {
-                cambiarVista('configView');
+                mostrarSaludoInicial();
             } else {
                 indiceActual = 0;
                 mostrarFraseActual();
@@ -487,43 +460,18 @@
         function cambiarVista(vistaId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById(vistaId).classList.add('active');
-            
-            if (vistaId === 'configView') {
-                const textoPlano = bancoFrases.map(f => `${f.en} | ${f.es}`).join('\n');
-                document.getElementById('inputFrases').value = textoPlano;
-            }
         }
 
         function guardarConfiguracion() {
             const apiKey = document.getElementById('inputApiKey').value.trim();
-            const texto = document.getElementById('inputFrases').value;
-            
             if (apiKey) {
                 localStorage.setItem('groq_api_key', apiKey);
+                alert("¡Configuración guardada con éxito!");
+                cambiarVista('mainView');
+                if (bancoFrases.length === 0) mostrarSaludoInicial();
             } else {
-                localStorage.removeItem('groq_api_key');
+                alert("Por favor ingresa una API Key válida.");
             }
-
-            const lineas = texto.split('\n');
-            let nuevasFrases = [];
-
-            for (let linea of lineas) {
-                if (linea.includes('|')) {
-                    const partes = linea.split('|');
-                    const en = partes[0].trim();
-                    const es = partes[1].trim();
-                    if (en && es) {
-                        nuevasFrases.push({ en, es });
-                    }
-                }
-            }
-
-            bancoFrases = nuevasFrases;
-            localStorage.setItem('mi_banco_ingles', JSON.stringify(bancoFrases));
-            
-            indiceActual = 0;
-            cambiarVista('mainView');
-            mostrarFraseActual();
         }
 
         async function generarFrasesConGroq() {
@@ -531,13 +479,13 @@
             const apiKey = localStorage.getItem('groq_api_key') || document.getElementById('inputApiKey').value.trim();
 
             if (!apiKey) {
-                alert("Por favor ingresa tu API Key de Groq en la sección de configuración (⚙️).");
+                alert("Por favor ingresa tu API Key de Groq en la configuración (⚙️).");
                 cambiarVista('configView');
                 return;
             }
 
             if (!tema) {
-                alert("Por favor escribe un tema o situación (ej: Comida, Restaurante, Viajes).");
+                alert("Por favor escribe un tema (ej: Comida, aeropuerto, oficina).");
                 return;
             }
 
@@ -597,8 +545,31 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
                 alert(error.message);
             } finally {
                 btn.disabled = false;
-                btn.textContent = "✨ Generar IA";
+                btn.textContent = "✨ Generar";
             }
+        }
+
+        function mostrarSaludoInicial() {
+            const card = document.getElementById('phraseCard');
+            const navControls = document.getElementById('navControls');
+            const counterBadge = document.getElementById('counterBadge');
+
+            counterBadge.textContent = "Bienvenido";
+            const saludo = saludosAleatorios[Math.floor(Math.random() * saludosAleatorios.length)];
+            const textoSeguro = saludo.en.replace(/'/g, "\\'");
+
+            card.innerHTML = `
+                <button class="btn-copy" onclick="copiarTexto('${saludo.en} - ${saludo.es}')" title="Copiar">📋</button>
+                <div class="english-phrase">"${saludo.en}"</div>
+                <button class="audio-btn-large" onclick="reproducirAudio('${textoSeguro}')" title="Escuchar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+                </button>
+                <div class="spanish-translation">${saludo.es}</div>
+            `;
+
+            navControls.innerHTML = `
+                <button class="btn-primary" onclick="document.getElementById('inputTopic').focus()">✨ Escribe un tema abajo para empezar</button>
+            `;
         }
 
         function mostrarFraseActual() {
@@ -607,22 +578,19 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
             const counterBadge = document.getElementById('counterBadge');
 
             if (bancoFrases.length === 0) {
-                counterBadge.textContent = "Banco vacío";
-                card.innerHTML = `<div class="english-phrase" style="font-size: 1.1rem; color: var(--muted-color);">No hay frases cargadas.<br>Usa el generador de IA o la ⚙️ para empezar.</div>`;
-                navControls.innerHTML = `<button class="btn-primary" onclick="cambiarVista('configView')">⚙️ Configurar</button>`;
+                mostrarSaludoInicial();
                 return;
             }
 
-            // Si se repasaron todas las frases (llegó al final)
             if (indiceActual >= bancoFrases.length) {
                 counterBadge.textContent = "¡Ciclo completado!";
                 card.innerHTML = `
                     <div class="english-phrase" style="color: var(--success-color); font-size: 1.3rem;">¡Excelente trabajo! 🚀</div>
-                    <div class="spanish-translation" style="font-style: normal; margin-bottom: 10px;">Has repasado ordenadamente todas las frases de tu banco.</div>
+                    <div class="spanish-translation" style="font-style: normal; margin-bottom: 10px;">Has repasado todas las frases de tu banco.</div>
                 `;
                 navControls.innerHTML = `
                     <button class="btn-nav" onclick="reiniciarCiclo()">🔄 Repetir</button>
-                    <button class="btn-primary" onclick="cambiarVista('configView')">⚙️ Gestionar</button>
+                    <button class="btn-primary" onclick="document.getElementById('inputTopic').focus()">✨ Nuevo Tema</button>
                 `;
                 return;
             }
@@ -666,13 +634,11 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
         }
 
         function limpiarBancoTotal() {
-            if (confirm("¿Estás seguro de vaciar todo tu banco de frases?")) {
+            if (confirm("¿Estás seguro de vaciar el banco actual?")) {
                 bancoFrases = [];
                 localStorage.removeItem('mi_banco_ingles');
-                document.getElementById('inputFrases').value = '';
                 indiceActual = 0;
-                mostrarFraseActual();
-                cambiarVista('configView');
+                mostrarSaludoInicial();
             }
         }
 
@@ -688,8 +654,10 @@ No incluyas numeración, ni viñetas, ni texto adicional, solo las líneas con e
         function copiarFraseActual() {
             if (bancoFrases.length === 0 || indiceActual >= bancoFrases.length) return;
             const frase = bancoFrases[indiceActual];
-            const textoACopiar = `${frase.en} - ${frase.es}`;
-            
+            copiarTexto(`${frase.en} - ${frase.es}`);
+        }
+
+        function copiarTexto(textoACopiar) {
             navigator.clipboard.writeText(textoACopiar).then(() => {
                 const toast = document.getElementById('toast');
                 toast.classList.add('show');
